@@ -5,6 +5,9 @@
  */
 package vistas;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 /**
  *
  * @author edwin
@@ -18,6 +21,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
+         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/recursos/imagenes/iconoAgenda.png"));
+        setIconImage(icon);
+        setVisible(true);
     }
 
     /**
@@ -47,10 +53,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("La agenda");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(12, 12, 22));
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,6 +121,11 @@ public class Principal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnTemporizadorMouseExited(evt);
+            }
+        });
+        BtnTemporizador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTemporizadorActionPerformed(evt);
             }
         });
 
@@ -189,6 +201,11 @@ public class Principal extends javax.swing.JFrame {
                 BtnEventosMouseExited(evt);
             }
         });
+        BtnEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEventosActionPerformed(evt);
+            }
+        });
 
         BtnPerfil.setBackground(new java.awt.Color(0, 0, 0));
         BtnPerfil.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
@@ -258,11 +275,11 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addGroup(PanelCambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnApuntes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
+                            .addComponent(BtnCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
                         .addGap(74, 74, 74)
                         .addGroup(PanelCambiableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(BtnPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))))
+                            .addComponent(BtnTemporizador, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))))
                 .addGap(37, 37, 37))
         );
         PanelCambiableLayout.setVerticalGroup(
@@ -285,7 +302,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(49, 49, 49))
         );
 
-        jPanel4.setBackground(new java.awt.Color(12, 12, 22));
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 10)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -296,7 +313,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,12 +403,23 @@ public class Principal extends javax.swing.JFrame {
     private void BtnCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCronometroActionPerformed
         Crono cr = new Crono(this,true);
         cr.setVisible(true);
+        
     }//GEN-LAST:event_BtnCronometroActionPerformed
 
     private void BtnCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCalendarioActionPerformed
         Calendario cal = new Calendario(this,true);
         cal.setVisible(true);
     }//GEN-LAST:event_BtnCalendarioActionPerformed
+
+    private void BtnTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemporizadorActionPerformed
+        Temporizador tem = new Temporizador(this,true);
+        tem.setVisible(true);
+    }//GEN-LAST:event_BtnTemporizadorActionPerformed
+
+    private void BtnEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEventosActionPerformed
+        OpcionesEventos eve = new OpcionesEventos(new javax.swing.JDialog(),true);
+        eve.setVisible(true);
+    }//GEN-LAST:event_BtnEventosActionPerformed
 
     /**
      * @param args the command line arguments
