@@ -10,7 +10,7 @@ import it.sauronsoftware.junique.JUnique;
 import javax.swing.JOptionPane;
 import servicios.Configuracion;
 import servicios.SegundoPlano;
-import vistas.Cronometro;
+import vistas.Principal;
 
 /**
  *
@@ -41,9 +41,8 @@ public class Agenda {
             System.exit(0);
         }
         
-        Cronometro cron = new Cronometro();
-        cron.setLocationRelativeTo(null);
-        cron.setVisible(true);
+        Principal principal = new Principal();
+        principal.setVisible(true);
         
         SegundoPlano background = new SegundoPlano();
         Thread hilo = new Thread(background); 

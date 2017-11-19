@@ -6,10 +6,15 @@
 package servicios;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import vistas.Eventos;
+import vistas.TarjetaEvento;
 
 /**
  *
@@ -19,6 +24,7 @@ public class Registros {
     
     private PreparedStatement statement;
     private String sql;
+    private ResultSet rs;
     
     public void crearEvento(String titulo, String descripcion, String fecha, String hora, String tipo, boolean repetir){
     
@@ -42,6 +48,213 @@ public class Registros {
             Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
         }
     
+    }
+    
+    public int cargarCumpleanios(JPanel panel, Map componentes, Eventos ev){
+        
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Cumpleaños'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mes"));
+                tarjeta.Fecha.setText(rs.getString("dia"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                panel.add(tarjeta);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+    }
+    
+        
+    public int cargarCitas(JPanel panel, Map componentes, Eventos ev){
+        
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Cita Médica'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mes"));
+                tarjeta.Fecha.setText(rs.getString("dia"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                panel.add(tarjeta);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+    }
+        
+     
+    public int cargarReuniones(JPanel panel, Map componentes, Eventos ev){
+        
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Reuniones'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mes"));
+                tarjeta.Fecha.setText(rs.getString("dia"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                panel.add(tarjeta);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+    }
+    
+    public int cargarBodas(JPanel panel, Map componentes, Eventos ev){
+        
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Bodas'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mes"));
+                tarjeta.Fecha.setText(rs.getString("dia"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                panel.add(tarjeta);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+    }
+    
+    public int cargarOtros(JPanel panel, Map componentes, Eventos ev){
+        
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Otros'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mes"));
+                tarjeta.Fecha.setText(rs.getString("dia"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                panel.add(tarjeta);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+    }
+    
+    String[] datos = new String[5];
+    public String[] detalle(String id){
+        
+        try {
+            
+            
+            sql = "SELECT titulo, descripcion, fecha, hora, categoria from eventos where id=?";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            statement.setInt(1, Integer.valueOf(id));
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                
+                datos[0] = rs.getString("titulo");
+                datos[1] = rs.getString("descripcion");
+                datos[2] = rs.getString("fecha");
+                datos[3] = rs.getString("hora");
+                datos[4] = rs.getString("categoria");
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return datos;
     }
     
 }
