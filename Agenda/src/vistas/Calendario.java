@@ -65,6 +65,7 @@ public class Calendario extends javax.swing.JDialog {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 40));
 
         jCalendar2.setBackground(new java.awt.Color(12, 12, 22));
+        jCalendar2.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jPanel1.add(jCalendar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 850, 410));
 
         btnCerrar.setBackground(new java.awt.Color(102, 0, 0));
@@ -76,6 +77,7 @@ public class Calendario extends javax.swing.JDialog {
         btnCerrar.setBorderPainted(false);
         btnCerrar.setContentAreaFilled(false);
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setFocusPainted(false);
         btnCerrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/closePeque.png"))); // NOI18N
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

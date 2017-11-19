@@ -123,6 +123,7 @@ public class OpcionesEventos extends javax.swing.JDialog {
         BtnCerrar.setBorderPainted(false);
         BtnCerrar.setContentAreaFilled(false);
         BtnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnCerrar.setFocusPainted(false);
         BtnCerrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/closePeque.png"))); // NOI18N
         BtnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -166,7 +167,7 @@ public class OpcionesEventos extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnVerMouseExited
 
     private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
-        MostrarEventos Ver = new MostrarEventos(new javax.swing.JDialog(),true);
+        Eventos Ver = new Eventos(new javax.swing.JDialog(),true);
         Ver.setVisible(true);
     }//GEN-LAST:event_BtnVerActionPerformed
 

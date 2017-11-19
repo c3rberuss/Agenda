@@ -27,9 +27,10 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
     private Map componentes;
     private DetalleEvento detalle;
     
-    public Eventos(java.awt.Frame parent, boolean modal) {
+    public Eventos(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
 
         agregarTarjetas();
         componentes = new HashMap();
@@ -84,11 +85,10 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
         eventosOtros = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(910, 500));
         setResizable(false);
 
-        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setBackground(new java.awt.Color(12, 12, 22));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         Cumpleanios.setBackground(new java.awt.Color(0, 0, 0));
@@ -226,7 +226,7 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -262,7 +262,7 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Eventos dialog = new Eventos(new javax.swing.JFrame(), true);
+                Eventos dialog = new Eventos(new javax.swing.JDialog(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
