@@ -8,7 +8,6 @@ package servicios;
 import agenda.Agenda;
 import vistas.Notificacion;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -59,7 +58,7 @@ public class SegundoPlano implements Runnable{
 
         //Se muestra la notificación
         
-        noti = new Notificacion(5, "cumpleaños", "Notificación".toUpperCase(), "Texto de prueba");
+        noti = new Notificacion(5, "evento", "Notificación".toUpperCase(), "Texto de prueba");
         //Suena para notificar
         sonar();
         

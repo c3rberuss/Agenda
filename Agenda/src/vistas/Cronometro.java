@@ -5,16 +5,10 @@
  */
 package vistas;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import servicios.Fuente;
 
 /**
@@ -73,15 +67,15 @@ public class Cronometro extends javax.swing.JFrame {
             setMinutes(0);
             setSeconds(0);
             setMiliSeconds(0);
-            Fuente fuente = new Fuente("tenoclock");
-            this.LblHours.setFont(fuente.MiFont(0, 48));
-            this.LblMiliSeconds.setFont(fuente.MiFont(0, 48));
-            this.LblMinutes.setFont(fuente.MiFont(0, 48));
-            this.LblSeconds.setFont(fuente.MiFont(0, 48));
+            Fuente fuente = new Fuente("Atletic");
+            this.LblHours.setFont(fuente.MiFont(1, 48));
+            this.LblMiliSeconds.setFont(fuente.MiFont(1, 48));
+            this.LblMinutes.setFont(fuente.MiFont(1, 48));
+            this.LblSeconds.setFont(fuente.MiFont(1, 48));
             
-            this.jLabel2.setFont(fuente.MiFont(0, 48));
-            this.jLabel4.setFont(fuente.MiFont(0, 48));
-            this.jLabel6.setFont(fuente.MiFont(0, 48));
+            this.jLabel2.setFont(fuente.MiFont(1, 48));
+            this.jLabel4.setFont(fuente.MiFont(1, 48));
+            this.jLabel6.setFont(fuente.MiFont(1, 48));
             
             init = false;
 
