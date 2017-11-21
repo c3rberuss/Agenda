@@ -225,14 +225,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        BtnCronometro.setBackground(new java.awt.Color(0, 0, 0));
+        BtnCronometro.setBackground(new java.awt.Color(12, 12, 22));
         BtnCronometro.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         BtnCronometro.setForeground(new java.awt.Color(255, 255, 255));
         BtnCronometro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/cro.png"))); // NOI18N
         BtnCronometro.setText("MI CRONOMETRO");
         BtnCronometro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         BtnCronometro.setBorderPainted(false);
-        BtnCronometro.setContentAreaFilled(false);
         BtnCronometro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCronometro.setFocusPainted(false);
         BtnCronometro.setIconTextGap(10);

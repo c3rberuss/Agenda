@@ -122,7 +122,16 @@ public class Registros {
             
             rs = statement.executeQuery();
             
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
             while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
                 
                 TarjetaEvento tarjeta = new TarjetaEvento();
                 tarjeta.titulo.setText(rs.getString("titulo"));
@@ -131,10 +140,22 @@ public class Registros {
                 tarjeta.Ver.setActionCommand(rs.getString("id"));
                 tarjeta.Ver.addActionListener(ev);
                 
-                panel.add(tarjeta);
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
                 panel.updateUI();
                 componentes.put(rs.getString("id"), tarjeta);
                 count++;
+                columna++;
+
             }
             
         } catch (SQLException ex) {
@@ -158,7 +179,16 @@ public class Registros {
             
             rs = statement.executeQuery();
             
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
             while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
                 
                 TarjetaEvento tarjeta = new TarjetaEvento();
                 tarjeta.titulo.setText(rs.getString("titulo"));
@@ -167,10 +197,22 @@ public class Registros {
                 tarjeta.Ver.setActionCommand(rs.getString("id"));
                 tarjeta.Ver.addActionListener(ev);
                 
-                panel.add(tarjeta);
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
                 panel.updateUI();
                 componentes.put(rs.getString("id"), tarjeta);
                 count++;
+                columna++;
+
             }
             
         } catch (SQLException ex) {
@@ -193,7 +235,16 @@ public class Registros {
             
             rs = statement.executeQuery();
             
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
             while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
                 
                 TarjetaEvento tarjeta = new TarjetaEvento();
                 tarjeta.titulo.setText(rs.getString("titulo"));
@@ -202,10 +253,22 @@ public class Registros {
                 tarjeta.Ver.setActionCommand(rs.getString("id"));
                 tarjeta.Ver.addActionListener(ev);
                 
-                panel.add(tarjeta);
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
                 panel.updateUI();
                 componentes.put(rs.getString("id"), tarjeta);
                 count++;
+                columna++;
+
             }
             
         } catch (SQLException ex) {
@@ -228,7 +291,16 @@ public class Registros {
             
             rs = statement.executeQuery();
             
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
             while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
                 
                 TarjetaEvento tarjeta = new TarjetaEvento();
                 tarjeta.titulo.setText(rs.getString("titulo"));
@@ -237,10 +309,22 @@ public class Registros {
                 tarjeta.Ver.setActionCommand(rs.getString("id"));
                 tarjeta.Ver.addActionListener(ev);
                 
-                panel.add(tarjeta);
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
                 panel.updateUI();
                 componentes.put(rs.getString("id"), tarjeta);
                 count++;
+                columna++;
+
             }
             
         } catch (SQLException ex) {

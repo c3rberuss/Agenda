@@ -119,6 +119,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         btnCerrar.setBorderPainted(false);
         btnCerrar.setContentAreaFilled(false);
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setFocusPainted(false);
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCerrarMouseEntered(evt);
