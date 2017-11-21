@@ -6,22 +6,58 @@
 package vistas;
 
 import Animacion.Fade;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import servicios.Registros;
 
 /**
  *
  * @author edwin
  */
-public class MostrarEventos extends javax.swing.JDialog {
+public class MostrarEventos extends javax.swing.JDialog implements ActionListener{
 
     /**
      * Creates new form Eventos
      */
+    
+    private Registros reg;
+    private Map componentes;
+    private DetalleEvento detalle;
+    
     public MostrarEventos(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        componentes = new HashMap();
+        reg = new Registros();
+        
+        if(reg.cargarCumpleanios(this.eventosCumple, this.componentes, this) < 1){
+            this.jTabbedPane1.remove(this.Cumpleanios);
+        }
+        
+        if(reg.cargarCitas(eventosCitas, componentes, this) < 1){
+            this.jTabbedPane1.remove(this.CitasMedicas);
+        }
+        
+        if(reg.cargarReuniones(eventosReuniones, componentes, this) < 1){
+            this.jTabbedPane1.remove(this.Reuniones);
+        }
+        
+        if(reg.cargarBodas(eventosBodas, componentes, this) < 1){
+            this.jTabbedPane1.remove(this.Bodas);
+        }
+        
+        if(reg.cargarOtros(eventosOtros, componentes, this) < 1){
+            this.jTabbedPane1.remove(this.Otros);
+        }
+     
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,6 +71,22 @@ public class MostrarEventos extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Cumpleanios = new javax.swing.JInternalFrame();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        eventosCumple = new javax.swing.JPanel();
+        CitasMedicas = new javax.swing.JInternalFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        eventosCitas = new javax.swing.JPanel();
+        Reuniones = new javax.swing.JInternalFrame();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        eventosReuniones = new javax.swing.JPanel();
+        Bodas = new javax.swing.JInternalFrame();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        eventosBodas = new javax.swing.JPanel();
+        Otros = new javax.swing.JInternalFrame();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        eventosOtros = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -81,6 +133,148 @@ public class MostrarEventos extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, 80, 30));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+
+        Cumpleanios.setBackground(new java.awt.Color(12, 12, 22));
+        Cumpleanios.setBorder(null);
+        Cumpleanios.setForeground(new java.awt.Color(0, 0, 0));
+        Cumpleanios.setVisible(true);
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        eventosCumple.setBackground(new java.awt.Color(12, 12, 22));
+        eventosCumple.setForeground(new java.awt.Color(255, 255, 255));
+        java.awt.GridBagLayout eventosCumpleLayout = new java.awt.GridBagLayout();
+        eventosCumpleLayout.columnWidths = new int[] {420};
+        eventosCumpleLayout.rowHeights = new int[] {100};
+        eventosCumpleLayout.columnWeights = new double[] {1.0};
+        eventosCumpleLayout.rowWeights = new double[] {1.0};
+        eventosCumple.setLayout(eventosCumpleLayout);
+        jScrollPane1.setViewportView(eventosCumple);
+
+        javax.swing.GroupLayout CumpleaniosLayout = new javax.swing.GroupLayout(Cumpleanios.getContentPane());
+        Cumpleanios.getContentPane().setLayout(CumpleaniosLayout);
+        CumpleaniosLayout.setHorizontalGroup(
+            CumpleaniosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+        );
+        CumpleaniosLayout.setVerticalGroup(
+            CumpleaniosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Cumpleaños", Cumpleanios);
+
+        CitasMedicas.setBackground(new java.awt.Color(12, 12, 22));
+        CitasMedicas.setBorder(null);
+        CitasMedicas.setForeground(new java.awt.Color(0, 0, 0));
+        CitasMedicas.setVisible(true);
+
+        jScrollPane2.setBorder(null);
+
+        eventosCitas.setBackground(new java.awt.Color(12, 12, 22));
+        eventosCitas.setForeground(new java.awt.Color(255, 255, 255));
+        eventosCitas.setLayout(new java.awt.GridBagLayout());
+        jScrollPane2.setViewportView(eventosCitas);
+
+        javax.swing.GroupLayout CitasMedicasLayout = new javax.swing.GroupLayout(CitasMedicas.getContentPane());
+        CitasMedicas.getContentPane().setLayout(CitasMedicasLayout);
+        CitasMedicasLayout.setHorizontalGroup(
+            CitasMedicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CitasMedicasLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        CitasMedicasLayout.setVerticalGroup(
+            CitasMedicasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CitasMedicasLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Citas Médicas", CitasMedicas);
+
+        Reuniones.setBackground(new java.awt.Color(12, 12, 22));
+        Reuniones.setBorder(null);
+        Reuniones.setForeground(new java.awt.Color(0, 0, 0));
+        Reuniones.setVisible(true);
+
+        jScrollPane3.setBorder(null);
+
+        eventosReuniones.setBackground(new java.awt.Color(12, 12, 22));
+        eventosReuniones.setForeground(new java.awt.Color(255, 255, 255));
+        eventosReuniones.setLayout(new java.awt.GridBagLayout());
+        jScrollPane3.setViewportView(eventosReuniones);
+
+        javax.swing.GroupLayout ReunionesLayout = new javax.swing.GroupLayout(Reuniones.getContentPane());
+        Reuniones.getContentPane().setLayout(ReunionesLayout);
+        ReunionesLayout.setHorizontalGroup(
+            ReunionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+        );
+        ReunionesLayout.setVerticalGroup(
+            ReunionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Reuniones", Reuniones);
+
+        Bodas.setBackground(new java.awt.Color(12, 12, 22));
+        Bodas.setBorder(null);
+        Bodas.setForeground(new java.awt.Color(0, 0, 0));
+        Bodas.setVisible(true);
+
+        jScrollPane4.setBorder(null);
+
+        eventosBodas.setBackground(new java.awt.Color(12, 12, 22));
+        eventosBodas.setForeground(new java.awt.Color(255, 255, 255));
+        eventosBodas.setLayout(new java.awt.GridBagLayout());
+        jScrollPane4.setViewportView(eventosBodas);
+
+        javax.swing.GroupLayout BodasLayout = new javax.swing.GroupLayout(Bodas.getContentPane());
+        Bodas.getContentPane().setLayout(BodasLayout);
+        BodasLayout.setHorizontalGroup(
+            BodasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+        );
+        BodasLayout.setVerticalGroup(
+            BodasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Bodas", Bodas);
+
+        Otros.setBackground(new java.awt.Color(12, 12, 22));
+        Otros.setBorder(null);
+        Otros.setForeground(new java.awt.Color(0, 0, 0));
+        Otros.setVisible(true);
+
+        jScrollPane5.setBorder(null);
+
+        eventosOtros.setBackground(new java.awt.Color(12, 12, 22));
+        eventosOtros.setForeground(new java.awt.Color(255, 255, 255));
+        eventosOtros.setLayout(new java.awt.GridBagLayout());
+        jScrollPane5.setViewportView(eventosOtros);
+
+        javax.swing.GroupLayout OtrosLayout = new javax.swing.GroupLayout(Otros.getContentPane());
+        Otros.getContentPane().setLayout(OtrosLayout);
+        OtrosLayout.setHorizontalGroup(
+            OtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+        );
+        OtrosLayout.setVerticalGroup(
+            OtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Otros", Otros);
+
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 42, 930, 500));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
@@ -143,9 +337,53 @@ public class MostrarEventos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame Bodas;
+    private javax.swing.JInternalFrame CitasMedicas;
+    private javax.swing.JInternalFrame Cumpleanios;
+    private javax.swing.JInternalFrame Otros;
+    private javax.swing.JInternalFrame Reuniones;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JPanel eventosBodas;
+    private javax.swing.JPanel eventosCitas;
+    private javax.swing.JPanel eventosCumple;
+    private javax.swing.JPanel eventosOtros;
+    private javax.swing.JPanel eventosReuniones;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        //se obtiene el comando ejecutado
+        String comando = e.getActionCommand();
+        //se recorre el MAP
+        Iterator it = componentes.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry)it.next();
+            //se obtiene el KEY -> identificador unico
+            String itm = entry.getKey().toString();
+            //si comando de componente es igual a comando pulsado
+            if( itm.equals(comando))
+            {
+                //se recupera el contenido del JTextfield
+                //String name = ((jpComponente) entry.getValue()).txtName.getText();
+                //mostramos resultado
+                //JOptionPane.showMessageDialog(null, "Se presiono boton " + itm + " \n Hola " );//+ name);
+                
+                detalle = new DetalleEvento(null, true, comando);
+                detalle.setLocationRelativeTo(null);
+                detalle.setVisible(true);
+                
+            }
+        }
+
+    }
 }

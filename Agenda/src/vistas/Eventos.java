@@ -35,7 +35,7 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
         componentes = new HashMap();
         reg = new Registros();
         
-        if(reg.cargarCumpleanios(this.eventosCumple, this.componentes, this) < 1){
+     /*   if(reg.cargarCumpleanios(this.eventosCumple, this.componentes, this) < 1){
             this.jTabbedPane1.remove(this.Cumpleanios);
         }
         
@@ -53,7 +53,7 @@ public class Eventos extends javax.swing.JDialog implements ActionListener{
         
         if(reg.cargarOtros(eventosOtros, componentes, this) < 1){
             this.jTabbedPane1.remove(this.Otros);
-        }
+        }*/
         
     }
 

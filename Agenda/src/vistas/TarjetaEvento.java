@@ -39,6 +39,8 @@ public class TarjetaEvento extends javax.swing.JPanel {
         Fecha = new javax.swing.JLabel();
         Mes = new javax.swing.JLabel();
 
+        setBorder(new org.edisoncor.gui.util.DropShadowBorder());
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(420, 100));
         setPreferredSize(new java.awt.Dimension(420, 100));
 
@@ -68,7 +70,7 @@ public class TarjetaEvento extends javax.swing.JPanel {
                     .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Ver)))
@@ -79,11 +81,11 @@ public class TarjetaEvento extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Ver)))

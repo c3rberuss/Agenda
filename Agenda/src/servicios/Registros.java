@@ -5,6 +5,7 @@
  */
 package servicios;
 
+import java.awt.GridBagConstraints;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vistas.Eventos;
+import vistas.MostrarEventos;
 import vistas.TarjetaEvento;
 
 /**
@@ -50,7 +52,7 @@ public class Registros {
     
     }
     
-    public int cargarCumpleanios(JPanel panel, Map componentes, Eventos ev){
+    public int cargarCumpleanios(JPanel panel, Map componentes, MostrarEventos ev){
         
         int count= 0;
         
@@ -63,7 +65,16 @@ public class Registros {
             
             rs = statement.executeQuery();
             
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
             while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
                 
                 TarjetaEvento tarjeta = new TarjetaEvento();
                 tarjeta.titulo.setText(rs.getString("titulo"));
@@ -72,10 +83,22 @@ public class Registros {
                 tarjeta.Ver.setActionCommand(rs.getString("id"));
                 tarjeta.Ver.addActionListener(ev);
                 
-                panel.add(tarjeta);
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
                 panel.updateUI();
                 componentes.put(rs.getString("id"), tarjeta);
                 count++;
+                columna++;
+
             }
             
         } catch (SQLException ex) {
@@ -86,7 +109,7 @@ public class Registros {
     }
     
         
-    public int cargarCitas(JPanel panel, Map componentes, Eventos ev){
+    public int cargarCitas(JPanel panel, Map componentes, MostrarEventos ev){
         
         int count= 0;
         
@@ -122,7 +145,7 @@ public class Registros {
     }
         
      
-    public int cargarReuniones(JPanel panel, Map componentes, Eventos ev){
+    public int cargarReuniones(JPanel panel, Map componentes, MostrarEventos ev){
         
         int count= 0;
         
@@ -157,7 +180,7 @@ public class Registros {
        return count; 
     }
     
-    public int cargarBodas(JPanel panel, Map componentes, Eventos ev){
+    public int cargarBodas(JPanel panel, Map componentes, MostrarEventos ev){
         
         int count= 0;
         
@@ -192,7 +215,7 @@ public class Registros {
        return count; 
     }
     
-    public int cargarOtros(JPanel panel, Map componentes, Eventos ev){
+    public int cargarOtros(JPanel panel, Map componentes, MostrarEventos ev){
         
         int count= 0;
         
