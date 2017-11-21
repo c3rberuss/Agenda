@@ -138,6 +138,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(0, 0, 0));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         Cumpleanios.setBackground(new java.awt.Color(12, 12, 22));
         Cumpleanios.setBorder(null);
@@ -166,10 +167,10 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         );
         CumpleaniosLayout.setVerticalGroup(
             CumpleaniosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Cumpleaños", Cumpleanios);
+        jTabbedPane1.addTab("CUMPLEAÑOS", new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/cumpleanosPestana.png")), Cumpleanios); // NOI18N
 
         CitasMedicas.setBackground(new java.awt.Color(12, 12, 22));
         CitasMedicas.setBorder(null);
@@ -198,7 +199,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Citas Médicas", CitasMedicas);
+        jTabbedPane1.addTab("CITAS MEDICAS", new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/citaMedica.png")), CitasMedicas); // NOI18N
 
         Reuniones.setBackground(new java.awt.Color(12, 12, 22));
         Reuniones.setBorder(null);
@@ -220,10 +221,10 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         );
         ReunionesLayout.setVerticalGroup(
             ReunionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Reuniones", Reuniones);
+        jTabbedPane1.addTab("REUNIONES", new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/ReunionesPestanha.png")), Reuniones); // NOI18N
 
         Bodas.setBackground(new java.awt.Color(12, 12, 22));
         Bodas.setBorder(null);
@@ -245,10 +246,10 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         );
         BodasLayout.setVerticalGroup(
             BodasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Bodas", Bodas);
+        jTabbedPane1.addTab("BODAS", new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/bodaPesta.png")), Bodas); // NOI18N
 
         Otros.setBackground(new java.awt.Color(12, 12, 22));
         Otros.setBorder(null);
@@ -270,12 +271,12 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         );
         OtrosLayout.setVerticalGroup(
             OtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Otros", Otros);
+        jTabbedPane1.addTab("OTROS", new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/otrosPestanha.png")), Otros); // NOI18N
 
-        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 42, 930, 500));
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 72, 930, 470));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 

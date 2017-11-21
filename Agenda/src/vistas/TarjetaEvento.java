@@ -45,6 +45,19 @@ public class TarjetaEvento extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(420, 100));
 
         Ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/view.png"))); // NOI18N
+        Ver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ver.setBorderPainted(false);
+        Ver.setContentAreaFilled(false);
+        Ver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Ver.setFocusPainted(false);
+        Ver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                VerMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                VerMouseExited(evt);
+            }
+        });
 
         titulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -70,10 +83,10 @@ public class TarjetaEvento extends javax.swing.JPanel {
                     .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Ver)))
+                        .addComponent(Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -81,19 +94,28 @@ public class TarjetaEvento extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                     .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Ver)))
+                        .addGap(6, 6, 6)
+                        .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         Ver.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerMouseEntered
+        this.Ver.setBorderPainted(true);
+    }//GEN-LAST:event_VerMouseEntered
+
+    private void VerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerMouseExited
+        this.Ver.setBorderPainted(false);
+    }//GEN-LAST:event_VerMouseExited
 
     private URL url = getClass().getResource("/recursos/imagenes/tarjeta.jpg");
     Image image = new ImageIcon(url).getImage();

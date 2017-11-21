@@ -47,6 +47,9 @@ public class DetalleEvento extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
         titulo = new javax.swing.JTextField();
@@ -64,156 +67,191 @@ public class DetalleEvento extends javax.swing.JDialog {
         editarDescripcion = new javax.swing.JToggleButton();
         editarCategoria = new javax.swing.JToggleButton();
         guardar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(12, 12, 22));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         descripcion.setEditable(false);
+        descripcion.setBackground(new java.awt.Color(12, 12, 22));
         descripcion.setColumns(20);
+        descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        descripcion.setForeground(new java.awt.Color(255, 255, 255));
         descripcion.setRows(5);
         jScrollPane1.setViewportView(descripcion);
 
-        titulo.setEditable(false);
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 248, -1));
 
-        jLabel1.setText("titulo:");
+        titulo.setEditable(false);
+        titulo.setBackground(new java.awt.Color(12, 12, 22));
+        titulo.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 90, 250, -1));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("TITULO:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
 
         fecha.setEditable(false);
+        fecha.setBackground(new java.awt.Color(12, 12, 22));
+        fecha.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 140, 250, -1));
 
-        jLabel2.setText("Fecha:");
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("FECHA:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
-        jLabel3.setText("Descripcion");
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("DESCRIPCION:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
 
         hora.setEditable(false);
+        hora.setBackground(new java.awt.Color(12, 12, 22));
+        hora.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        hora.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 248, -1));
 
-        jLabel4.setText("Hora");
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("HORA:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
 
         categoria.setEditable(false);
+        categoria.setBackground(new java.awt.Color(12, 12, 22));
+        categoria.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        categoria.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 248, -1));
 
-        jLabel5.setText("Categoria");
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CATEGORIA:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
 
         editarTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarTitulo.setBorderPainted(false);
+        editarTitulo.setContentAreaFilled(false);
+        editarTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarTitulo.setFocusPainted(false);
+        editarTitulo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
         editarTitulo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editarTituloStateChanged(evt);
             }
         });
+        jPanel1.add(editarTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 40, 20));
 
         editarHora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarHora.setBorderPainted(false);
+        editarHora.setContentAreaFilled(false);
+        editarHora.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarHora.setFocusPainted(false);
+        editarHora.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
         editarHora.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editarHoraStateChanged(evt);
             }
         });
+        jPanel1.add(editarHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 40, 20));
 
         editarFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarFecha.setBorderPainted(false);
+        editarFecha.setContentAreaFilled(false);
+        editarFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarFecha.setFocusPainted(false);
+        editarFecha.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
         editarFecha.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editarFechaStateChanged(evt);
             }
         });
+        jPanel1.add(editarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, 20));
 
         editarDescripcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarDescripcion.setBorderPainted(false);
+        editarDescripcion.setContentAreaFilled(false);
+        editarDescripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarDescripcion.setFocusPainted(false);
+        editarDescripcion.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
         editarDescripcion.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editarDescripcionStateChanged(evt);
             }
         });
+        jPanel1.add(editarDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 40, 20));
 
         editarCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarCategoria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarCategoria.setBorderPainted(false);
+        editarCategoria.setContentAreaFilled(false);
+        editarCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCategoria.setFocusPainted(false);
+        editarCategoria.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
         editarCategoria.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 editarCategoriaStateChanged(evt);
             }
         });
+        editarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarCategoriaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editarCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 40, 20));
 
-        guardar.setText("Guardar Cambios");
+        guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        guardar.setForeground(new java.awt.Color(255, 255, 255));
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/savePq.png"))); // NOI18N
+        guardar.setText("GUARDAR CAMBIOS");
+        guardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
+        guardar.setBorderPainted(false);
+        guardar.setContentAreaFilled(false);
+        guardar.setFocusPainted(false);
+        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                guardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                guardarMouseExited(evt);
+            }
+        });
         guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 guardarActionPerformed(evt);
             }
         });
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(421, 509, 150, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fecha)
-                            .addComponent(titulo)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel3)))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(categoria)
-                            .addComponent(hora))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(editarHora, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editarFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editarDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(editarTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(86, 86, 86))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(guardar)
-                .addGap(23, 23, 23))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(editarTitulo))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(editarFecha))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(editarHora))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(editarCategoria))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(editarDescripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(guardar)
-                .addGap(16, 16, 16))
-        );
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("DATOS DE MI EVENTO");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("REPETIR:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,6 +318,18 @@ public class DetalleEvento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseEntered
+        this.guardar.setBorderPainted(true);
+    }//GEN-LAST:event_guardarMouseEntered
+
+    private void guardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseExited
+        this.guardar.setBorderPainted(false);
+    }//GEN-LAST:event_guardarMouseExited
+
+    private void editarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarCategoriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,6 +373,8 @@ public class DetalleEvento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField categoria;
     private javax.swing.JTextArea descripcion;
     private javax.swing.JToggleButton editarCategoria;
@@ -338,6 +390,9 @@ public class DetalleEvento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables

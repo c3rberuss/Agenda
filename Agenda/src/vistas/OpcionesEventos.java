@@ -167,7 +167,7 @@ public class OpcionesEventos extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnVerMouseExited
 
     private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
-        Eventos Ver = new Eventos(new javax.swing.JDialog(),true);
+        MostrarEventos Ver = new MostrarEventos(new javax.swing.JDialog(),true);
         Ver.setVisible(true);
     }//GEN-LAST:event_BtnVerActionPerformed
 
