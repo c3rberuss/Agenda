@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import Animacion.Fade;
 import javax.swing.JOptionPane;
 import servicios.Registros;
 
@@ -69,6 +70,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         guardar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -238,7 +240,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(421, 509, 150, 30));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, 150, 30));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,6 +252,32 @@ public class DetalleEvento extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("REPETIR:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
+
+        btnCerrar.setBackground(new java.awt.Color(102, 0, 0));
+        btnCerrar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/close.png"))); // NOI18N
+        btnCerrar.setText("CERRAR");
+        btnCerrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        btnCerrar.setBorderPainted(false);
+        btnCerrar.setContentAreaFilled(false);
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setFocusPainted(false);
+        btnCerrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/closePeque.png"))); // NOI18N
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseExited(evt);
+            }
+        });
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 90, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 560));
 
@@ -330,6 +358,18 @@ public class DetalleEvento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_editarCategoriaActionPerformed
 
+    private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
+        this.btnCerrar.setBorderPainted(true);
+    }//GEN-LAST:event_btnCerrarMouseEntered
+
+    private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
+        this.btnCerrar.setBorderPainted(false);
+    }//GEN-LAST:event_btnCerrarMouseExited
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,6 +413,7 @@ public class DetalleEvento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField categoria;
