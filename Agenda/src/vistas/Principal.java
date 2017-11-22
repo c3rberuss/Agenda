@@ -224,6 +224,11 @@ public class Principal extends javax.swing.JFrame {
                 BtnPerfilMouseExited(evt);
             }
         });
+        BtnPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPerfilActionPerformed(evt);
+            }
+        });
 
         BtnCronometro.setBackground(new java.awt.Color(12, 12, 22));
         BtnCronometro.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
@@ -232,6 +237,7 @@ public class Principal extends javax.swing.JFrame {
         BtnCronometro.setText("MI CRONOMETRO");
         BtnCronometro.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         BtnCronometro.setBorderPainted(false);
+        BtnCronometro.setContentAreaFilled(false);
         BtnCronometro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnCronometro.setFocusPainted(false);
         BtnCronometro.setIconTextGap(10);
@@ -242,6 +248,9 @@ public class Principal extends javax.swing.JFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BtnCronometroMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BtnCronometroMousePressed(evt);
             }
         });
         BtnCronometro.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +363,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnTemporizadorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnTemporizadorMouseExited
         this.BtnTemporizador.setBorderPainted(false);
+        this.BtnTemporizador.setIconTextGap(10);
     }//GEN-LAST:event_BtnTemporizadorMouseExited
 
     private void BtnCalendarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCalendarioMouseEntered
@@ -362,6 +372,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnCalendarioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCalendarioMouseExited
         this.BtnCalendario.setBorderPainted(false);
+        this.BtnCalendario.setIconTextGap(10);
     }//GEN-LAST:event_BtnCalendarioMouseExited
 
     private void BtnApuntesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnApuntesMouseEntered
@@ -370,6 +381,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnApuntesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnApuntesMouseExited
         this.BtnApuntes.setBorderPainted(false);
+        this.BtnApuntes.setIconTextGap(10);
     }//GEN-LAST:event_BtnApuntesMouseExited
 
     private void BtnEventosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEventosMouseEntered
@@ -378,6 +390,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnEventosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnEventosMouseExited
         this.BtnEventos.setBorderPainted(false);
+        this.BtnEventos.setIconTextGap(10);
     }//GEN-LAST:event_BtnEventosMouseExited
 
     private void BtnPerfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnPerfilMouseEntered
@@ -386,6 +399,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnPerfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnPerfilMouseExited
         this.BtnPerfil.setBorderPainted(false);
+        this.BtnPerfil.setIconTextGap(10);
     }//GEN-LAST:event_BtnPerfilMouseExited
 
     private void BtnCronometroMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCronometroMouseEntered
@@ -394,6 +408,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void BtnCronometroMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCronometroMouseExited
         this.BtnCronometro.setBorderPainted(false);
+        this.BtnCronometro.setIconTextGap(10);
     }//GEN-LAST:event_BtnCronometroMouseExited
 
     private void BtnCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCronometroActionPerformed
@@ -417,6 +432,15 @@ public class Principal extends javax.swing.JFrame {
         OpcionesEventos OpEv = new OpcionesEventos(new javax.swing.JDialog(),true);
         OpEv.setVisible(true);
     }//GEN-LAST:event_BtnEventosActionPerformed
+
+    private void BtnCronometroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCronometroMousePressed
+        this.BtnCronometro.setIconTextGap(5);
+    }//GEN-LAST:event_BtnCronometroMousePressed
+
+    private void BtnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPerfilActionPerformed
+        Perfil per = new Perfil(this,true);
+        per.setVisible(true);
+    }//GEN-LAST:event_BtnPerfilActionPerformed
 
     /**
      * @param args the command line arguments
