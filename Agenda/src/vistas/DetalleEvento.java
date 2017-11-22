@@ -21,11 +21,13 @@ public class DetalleEvento extends javax.swing.JDialog {
     private Registros reg = new Registros();
     private String[] datos;
     private boolean editado;
+    private String id;
     
     public DetalleEvento(java.awt.Frame parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
         datos = reg.detalle(id);
+        this.id = id;
         
         this.titulo.setText(datos[0]);
         this.descripcion.setText(datos[1]);
@@ -352,6 +354,14 @@ public class DetalleEvento extends javax.swing.JDialog {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
        editado = false;
+       
+       datos[0] = this.titulo.getText();
+       datos[1] = this.fecha.getText();
+       datos[2] = this.hora.getText();
+       datos[3] = this.categoria.getText();
+       datos[4] = this.descripcion.getText();
+       
+       reg.guardarCambios(this.id, datos);
     }//GEN-LAST:event_guardarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

@@ -158,7 +158,7 @@ public class SegundoPlano implements Runnable{
             try {
                 fecha = new String[2];
                 fecha = mostrarHora();
-                notificar();
+                //notificar();
                 
                if( !buscarEventos(fecha[0], fecha[1])){
                    Thread.sleep(9450);
