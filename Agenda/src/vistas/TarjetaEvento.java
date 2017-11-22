@@ -35,14 +35,15 @@ public class TarjetaEvento extends javax.swing.JPanel {
     private void initComponents() {
 
         Ver = new javax.swing.JButton();
-        titulo = new javax.swing.JLabel();
         Fecha = new javax.swing.JLabel();
         Mes = new javax.swing.JLabel();
+        titulo = new javax.swing.JTextArea();
 
         setBorder(new org.edisoncor.gui.util.DropShadowBorder());
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(420, 100));
         setPreferredSize(new java.awt.Dimension(420, 100));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/view.png"))); // NOI18N
         Ver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -58,55 +59,30 @@ public class TarjetaEvento extends javax.swing.JPanel {
                 VerMouseExited(evt);
             }
         });
-
-        titulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Titulo del Evento");
+        add(Ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 47, 26));
+        Ver.getAccessibleContext().setAccessibleDescription("");
 
         Fecha.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Fecha.setForeground(new java.awt.Color(0, 0, 0));
         Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Fecha.setText("Miercoles 15");
+        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 7, 120, 24));
 
         Mes.setFont(new java.awt.Font("Dialog", 1, 42)); // NOI18N
         Mes.setForeground(new java.awt.Color(0, 0, 0));
         Mes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Mes.setText("DIC");
+        add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 61));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                    .addComponent(titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(Mes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-
-        Ver.getAccessibleContext().setAccessibleDescription("");
+        titulo.setEditable(false);
+        titulo.setBackground(new java.awt.Color(255, 255, 255));
+        titulo.setColumns(20);
+        titulo.setForeground(new java.awt.Color(0, 0, 0));
+        titulo.setLineWrap(true);
+        titulo.setRows(5);
+        titulo.setWrapStyleWord(true);
+        titulo.setBorder(null);
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 250, 33));
     }// </editor-fold>//GEN-END:initComponents
 
     private void VerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerMouseEntered
@@ -131,6 +107,6 @@ public class TarjetaEvento extends javax.swing.JPanel {
     public javax.swing.JLabel Fecha;
     public javax.swing.JLabel Mes;
     public javax.swing.JButton Ver;
-    public javax.swing.JLabel titulo;
+    public javax.swing.JTextArea titulo;
     // End of variables declaration//GEN-END:variables
 }

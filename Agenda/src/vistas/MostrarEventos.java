@@ -24,7 +24,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
      */
     
     private Registros reg;
-    private Map componentes;
+    public static Map componentes;
     private DetalleEvento detalle;
     
     public MostrarEventos(java.awt.Dialog parent, boolean modal) {
@@ -379,6 +379,8 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
                 //String name = ((jpComponente) entry.getValue()).txtName.getText();
                 //mostramos resultado
                 //JOptionPane.showMessageDialog(null, "Se presiono boton " + itm + " \n Hola " );//+ name);
+                
+                
                 
                 detalle = new DetalleEvento(null, true, comando);
                 detalle.setLocationRelativeTo(null);

@@ -9,11 +9,13 @@ import java.awt.GridBagConstraints;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import vistas.Eventos;
 import vistas.MostrarEventos;
 import vistas.TarjetaEvento;
@@ -362,6 +364,49 @@ public class Registros {
         }
         
         return datos;
+    }
+    
+    
+    public void guardarCambios(String id, String[] datos){
+        try {
+            sql = "UPDATE eventos SET titulo = ?, fecha = ?, hora=?, categoria=?, descripcion=? where id=?";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, datos[0]);
+            statement.setString(2, datos[1]);
+            statement.setString(3, datos[2]);
+            statement.setString(4, datos[3]);
+            statement.setString(5, datos[4]);
+            statement.setString(6, id);
+            
+            statement.executeUpdate();
+            
+            actualizarTarjeta(MostrarEventos.componentes, id, datos);
+            
+            JOptionPane.showMessageDialog(null, "Los cambios se guardaron exitosamente.");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void actualizarTarjeta(Map tarjetas, String id, String[] datosNuevos){
+        
+        Iterator it = tarjetas.entrySet().iterator();
+        
+        while(it.hasNext()){
+            Map.Entry entry = (Map.Entry) it.next();
+            
+            String itm = entry.getKey().toString();
+            
+            if(itm.equals(id)){
+                ((TarjetaEvento)entry.getValue()).titulo.setText(datosNuevos[0]);
+                ((TarjetaEvento)entry.getValue()).updateUI();
+            }
+        }
+        
     }
     
 }
