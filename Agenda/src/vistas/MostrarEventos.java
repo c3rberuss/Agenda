@@ -35,23 +35,23 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         componentes = new HashMap();
         reg = new Registros();
         
-        if(reg.cargarCumpleanios(this.eventosCumple, this.componentes, this) < 1){
+        if(reg.cargarTarjetas(this.eventosCumple, this.componentes, this, "Cumpleaños") < 1){
             this.jTabbedPane1.remove(this.Cumpleanios);
         }
         
-        if(reg.cargarCitas(eventosCitas, componentes, this) < 1){
+        if(reg.cargarTarjetas(eventosCitas, componentes, this, "Citas Médicas") < 1){
             this.jTabbedPane1.remove(this.CitasMedicas);
         }
         
-        if(reg.cargarReuniones(eventosReuniones, componentes, this) < 1){
+        if(reg.cargarTarjetas(eventosReuniones, componentes, this, "Reuniones") < 1){
             this.jTabbedPane1.remove(this.Reuniones);
         }
         
-        if(reg.cargarBodas(eventosBodas, componentes, this) < 1){
+        if(reg.cargarTarjetas(eventosBodas, componentes, this, "Bodas") < 1){
             this.jTabbedPane1.remove(this.Bodas);
         }
         
-        if(reg.cargarOtros(eventosOtros, componentes, this) < 1){
+        if(reg.cargarTarjetas(eventosOtros, componentes, this, "Otros") < 1){
             this.jTabbedPane1.remove(this.Otros);
         }
      

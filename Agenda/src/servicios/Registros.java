@@ -9,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
@@ -27,6 +29,97 @@ public class Registros {
     private PreparedStatement statement;
     private String sql;
     private ResultSet rs;
+    private Map meses;
+    private Map diaSemana;
+    
+    private String[] fecha;
+    
+    
+    public Registros(){
+        
+        meses = new HashMap();
+        diaSemana = new HashMap();
+        fecha = new String[2];
+        
+        meses.put("0", "ENE");
+        meses.put("1", "FEB");
+        meses.put("2", "MAR");
+        meses.put("3", "ABR");
+        meses.put("4", "MAY");
+        meses.put("5", "JUN");
+        meses.put("6", "JUL");
+        meses.put("7", "AGO");
+        meses.put("8", "SEP");
+        meses.put("9", "OCT");
+        meses.put("10", "NOV");
+        meses.put("11", "DIC");
+        
+        diaSemana.put("1", "Domingo");
+        diaSemana.put("2", "Lunes");
+        diaSemana.put("3", "Martes");
+        diaSemana.put("4", "Miercoles");
+        diaSemana.put("5", "Jueves");
+        diaSemana.put("6", "Viernes");
+        diaSemana.put("7", "Sábado");
+        
+    }
+    
+    
+    public int cargarTarjetas(JPanel panel, Map componentes, MostrarEventos ev, String categoria){
+        int count= 0;
+        
+        try {
+            
+            
+            sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where categoria='"+categoria+"'";
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            GridBagConstraints constraints = new GridBagConstraints();
+            int fila = 0;
+            int columna = 0;
+            
+            while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
+                
+                TarjetaEvento tarjeta = new TarjetaEvento();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.Mes.setText(rs.getString("mesLetras"));
+                tarjeta.Fecha.setText(rs.getString("diaLetras"));
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
+                panel.updateUI();
+                componentes.put(rs.getString("id"), tarjeta);
+                count++;
+                columna++;
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return count; 
+        
+    }
     
     public void crearEvento(String titulo, String descripcion, String fecha, String hora, String tipo, boolean repetir){
     
@@ -52,295 +145,14 @@ public class Registros {
     
     }
     
-    public int cargarCumpleanios(JPanel panel, Map componentes, MostrarEventos ev){
-        
-        int count= 0;
-        
-        try {
-            
-            
-            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Cumpleaños'";
-            
-            statement = SegundoPlano.db.prepareStatement(sql);
-            
-            rs = statement.executeQuery();
-            
-            GridBagConstraints constraints = new GridBagConstraints();
-            int fila = 0;
-            int columna = 0;
-            
-            while(rs.next()){
-                
-                if(columna == 2){
-                    fila++;
-                    columna = 0;
-                }
-                
-                TarjetaEvento tarjeta = new TarjetaEvento();
-                tarjeta.titulo.setText(rs.getString("titulo"));
-                tarjeta.Mes.setText(rs.getString("mes"));
-                tarjeta.Fecha.setText(rs.getString("dia"));
-                tarjeta.Ver.setActionCommand(rs.getString("id"));
-                tarjeta.Ver.addActionListener(ev);
-                
-                constraints = new GridBagConstraints();
-                
-                constraints.gridx = columna;
-                constraints.gridy = fila;
-                constraints.gridwidth = 1;
-                constraints.gridheight = 1;
-                constraints.weightx = 1.0;
-                constraints.weighty = 0.8;
-                constraints.fill = GridBagConstraints.NONE;
-                
-                panel.add(tarjeta, constraints);
-                panel.updateUI();
-                componentes.put(rs.getString("id"), tarjeta);
-                count++;
-                columna++;
-
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       return count; 
-    }
-    
-        
-    public int cargarCitas(JPanel panel, Map componentes, MostrarEventos ev){
-        
-        int count= 0;
-        
-        try {
-            
-            
-            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Cita Médica'";
-            
-            statement = SegundoPlano.db.prepareStatement(sql);
-            
-            rs = statement.executeQuery();
-            
-            GridBagConstraints constraints = new GridBagConstraints();
-            int fila = 0;
-            int columna = 0;
-            
-            while(rs.next()){
-                
-                if(columna == 2){
-                    fila++;
-                    columna = 0;
-                }
-                
-                TarjetaEvento tarjeta = new TarjetaEvento();
-                tarjeta.titulo.setText(rs.getString("titulo"));
-                tarjeta.Mes.setText(rs.getString("mes"));
-                tarjeta.Fecha.setText(rs.getString("dia"));
-                tarjeta.Ver.setActionCommand(rs.getString("id"));
-                tarjeta.Ver.addActionListener(ev);
-                
-                constraints = new GridBagConstraints();
-                
-                constraints.gridx = columna;
-                constraints.gridy = fila;
-                constraints.gridwidth = 1;
-                constraints.gridheight = 1;
-                constraints.weightx = 1.0;
-                constraints.weighty = 0.8;
-                constraints.fill = GridBagConstraints.NONE;
-                
-                panel.add(tarjeta, constraints);
-                panel.updateUI();
-                componentes.put(rs.getString("id"), tarjeta);
-                count++;
-                columna++;
-
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       return count; 
-    }
-        
-     
-    public int cargarReuniones(JPanel panel, Map componentes, MostrarEventos ev){
-        
-        int count= 0;
-        
-        try {
-            
-            
-            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Reuniones'";
-            
-            statement = SegundoPlano.db.prepareStatement(sql);
-            
-            rs = statement.executeQuery();
-            
-            GridBagConstraints constraints = new GridBagConstraints();
-            int fila = 0;
-            int columna = 0;
-            
-            while(rs.next()){
-                
-                if(columna == 2){
-                    fila++;
-                    columna = 0;
-                }
-                
-                TarjetaEvento tarjeta = new TarjetaEvento();
-                tarjeta.titulo.setText(rs.getString("titulo"));
-                tarjeta.Mes.setText(rs.getString("mes"));
-                tarjeta.Fecha.setText(rs.getString("dia"));
-                tarjeta.Ver.setActionCommand(rs.getString("id"));
-                tarjeta.Ver.addActionListener(ev);
-                
-                constraints = new GridBagConstraints();
-                
-                constraints.gridx = columna;
-                constraints.gridy = fila;
-                constraints.gridwidth = 1;
-                constraints.gridheight = 1;
-                constraints.weightx = 1.0;
-                constraints.weighty = 0.8;
-                constraints.fill = GridBagConstraints.NONE;
-                
-                panel.add(tarjeta, constraints);
-                panel.updateUI();
-                componentes.put(rs.getString("id"), tarjeta);
-                count++;
-                columna++;
-
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       return count; 
-    }
-    
-    public int cargarBodas(JPanel panel, Map componentes, MostrarEventos ev){
-        
-        int count= 0;
-        
-        try {
-            
-            
-            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Bodas'";
-            
-            statement = SegundoPlano.db.prepareStatement(sql);
-            
-            rs = statement.executeQuery();
-            
-            GridBagConstraints constraints = new GridBagConstraints();
-            int fila = 0;
-            int columna = 0;
-            
-            while(rs.next()){
-                
-                if(columna == 2){
-                    fila++;
-                    columna = 0;
-                }
-                
-                TarjetaEvento tarjeta = new TarjetaEvento();
-                tarjeta.titulo.setText(rs.getString("titulo"));
-                tarjeta.Mes.setText(rs.getString("mes"));
-                tarjeta.Fecha.setText(rs.getString("dia"));
-                tarjeta.Ver.setActionCommand(rs.getString("id"));
-                tarjeta.Ver.addActionListener(ev);
-                
-                constraints = new GridBagConstraints();
-                
-                constraints.gridx = columna;
-                constraints.gridy = fila;
-                constraints.gridwidth = 1;
-                constraints.gridheight = 1;
-                constraints.weightx = 1.0;
-                constraints.weighty = 0.8;
-                constraints.fill = GridBagConstraints.NONE;
-                
-                panel.add(tarjeta, constraints);
-                panel.updateUI();
-                componentes.put(rs.getString("id"), tarjeta);
-                count++;
-                columna++;
-
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       return count; 
-    }
-    
-    public int cargarOtros(JPanel panel, Map componentes, MostrarEventos ev){
-        
-        int count= 0;
-        
-        try {
-            
-            
-            sql = "SELECT id, titulo, dia, mes from eventos where categoria='Otros'";
-            
-            statement = SegundoPlano.db.prepareStatement(sql);
-            
-            rs = statement.executeQuery();
-            
-            GridBagConstraints constraints = new GridBagConstraints();
-            int fila = 0;
-            int columna = 0;
-            
-            while(rs.next()){
-                
-                if(columna == 2){
-                    fila++;
-                    columna = 0;
-                }
-                
-                TarjetaEvento tarjeta = new TarjetaEvento();
-                tarjeta.titulo.setText(rs.getString("titulo"));
-                tarjeta.Mes.setText(rs.getString("mes"));
-                tarjeta.Fecha.setText(rs.getString("dia"));
-                tarjeta.Ver.setActionCommand(rs.getString("id"));
-                tarjeta.Ver.addActionListener(ev);
-                
-                constraints = new GridBagConstraints();
-                
-                constraints.gridx = columna;
-                constraints.gridy = fila;
-                constraints.gridwidth = 1;
-                constraints.gridheight = 1;
-                constraints.weightx = 1.0;
-                constraints.weighty = 0.8;
-                constraints.fill = GridBagConstraints.NONE;
-                
-                panel.add(tarjeta, constraints);
-                panel.updateUI();
-                componentes.put(rs.getString("id"), tarjeta);
-                count++;
-                columna++;
-
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       return count; 
-    }
-    
-    String[] datos = new String[5];
+    String[] datos = new String[9];
     public String[] detalle(String id){
         
         try {
             
             
-            sql = "SELECT titulo, descripcion, fecha, hora, categoria from eventos where id=?";
+            sql = "SELECT titulo, descripcion, dia, mes, anio, hora, categoria, repetir, repeticion "
+                    + "from eventos where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
             statement.setInt(1, Integer.valueOf(id));
@@ -351,9 +163,13 @@ public class Registros {
                 
                 datos[0] = rs.getString("titulo");
                 datos[1] = rs.getString("descripcion");
-                datos[2] = rs.getString("fecha");
-                datos[3] = rs.getString("hora");
-                datos[4] = rs.getString("categoria");
+                datos[2] = rs.getString("anio");
+                datos[3] = rs.getString("mes");
+                datos[4] = rs.getString("dia");
+                datos[5] = rs.getString("hora");
+                datos[6] = rs.getString("categoria");
+                datos[7] = rs.getString("repetir");
+                datos[8] = rs.getString("repeticion");
                 
             }
             
@@ -365,22 +181,39 @@ public class Registros {
     }
     
     
-    public void guardarCambios(String id, String[] datos){
+    public void guardarCambios(String id, String[] datos, Calendar cal){
         try {
-            sql = "UPDATE eventos SET titulo = ?, fecha = ?, hora=?, categoria=?, descripcion=? where id=?";
+            sql = "UPDATE eventos SET titulo = ?,dia=?, mes=?, anio=?, mesLetras=?, "
+                    + "diaLetras=? ,fecha = ?, hora=?, categoria=?, descripcion=?, "
+                    + "repetir=?, repeticion=? where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
+            
+            fecha(cal);
+            
             
             statement.setString(1, datos[0]);
             statement.setString(2, datos[1]);
             statement.setString(3, datos[2]);
             statement.setString(4, datos[3]);
-            statement.setString(5, datos[4]);
-            statement.setString(6, id);
+           
+            statement.setString(5, this.meses.get(datos[2]).toString());
+            statement.setString(6, this.diaSemana.get(datos[4]).toString() + ", "+datos[1]);
+            statement.setString(7, datos[5]);
+            
+            statement.setString(8, datos[6]);
+            statement.setString(9, datos[7]);
+            statement.setString(10, datos[8]);
+            statement.setString(11, datos[9]);
+            statement.setString(12, datos[10]);
+            
+            statement.setString(13, id);
             
             statement.executeUpdate();
             
-            actualizarTarjeta(MostrarEventos.componentes, id, datos);
+            
+            actualizarTarjeta(MostrarEventos.componentes, id, this.meses.get(datos[2]).toString(), 
+                    this.diaSemana.get(datos[4]).toString() + ", "+datos[1], datos[0]);
             
             JOptionPane.showMessageDialog(null, "Los cambios se guardaron exitosamente.");
             
@@ -390,7 +223,7 @@ public class Registros {
         
     }
     
-    public void actualizarTarjeta(Map tarjetas, String id, String[] datosNuevos){
+    public void actualizarTarjeta(Map tarjetas, String id, String mes, String dia, String titulo){
         
         Iterator it = tarjetas.entrySet().iterator();
         
@@ -400,10 +233,24 @@ public class Registros {
             String itm = entry.getKey().toString();
             
             if(itm.equals(id)){
-                ((TarjetaEvento)entry.getValue()).titulo.setText(datosNuevos[0]);
+                ((TarjetaEvento)entry.getValue()).titulo.setText(titulo);
+                ((TarjetaEvento)entry.getValue()).Mes.setText(mes);
+                ((TarjetaEvento)entry.getValue()).Fecha.setText(dia);
+                
                 ((TarjetaEvento)entry.getValue()).updateUI();
             }
         }
+        
+    }
+    
+    
+    public void fecha(Calendar calendario){
+
+        String dia = String.valueOf(calendario.get(Calendar.DAY_OF_WEEK));
+        String mes = String.valueOf(calendario.get(Calendar.MONTH));
+        
+        fecha[0] = diaSemana.get(dia).toString() + ", "+calendario.get(Calendar.DAY_OF_MONTH);
+        fecha[1] = meses.get(mes).toString(); 
         
     }
     
