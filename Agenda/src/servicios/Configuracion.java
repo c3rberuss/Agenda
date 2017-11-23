@@ -81,7 +81,7 @@ public class Configuracion {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection("jdbc:sqlite:"+rootPath+separador+"agenda.db"); 
             
-            String sql = "CREATE TABLE IF NOT EXISTS `eventos` (\n" +
+            String sql = "CREATE TABLE `eventos` (\n" +
                         "	`titulo`	TEXT,\n" +
                         "	`descripcion`	TEXT,\n" +
                         "	`fecha`	TEXT,\n" +
@@ -90,8 +90,12 @@ public class Configuracion {
                         "	`repetir`	TEXT,\n" +
                         "	`dia`	INTEGER,\n" +
                         "	`id`	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
-                        "	`mes`	TEXT,\n" +
-                        "	`horaFin`	TEXT\n" +
+                        "	`mes`	INTEGER,\n" +
+                        "	`horaFin`	TEXT,\n" +
+                        "	`anio`	INTEGER,\n" +
+                        "	`diaLetras`	TEXT,\n" +
+                        "	`mesLetras`	TEXT,\n" +
+                        "	`repeticion`	TEXT\n" +
                         ");";
             
             PreparedStatement statement = con.prepareStatement(sql);
