@@ -33,6 +33,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         this.setLocationRelativeTo(null);
         
         componentes = new HashMap();
+
         reg = new Registros();
         
         if(reg.cargarTarjetas(this.eventosCumple, this.componentes, this, "Cumpleaños") < 1){
@@ -91,6 +92,11 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(12, 12, 22));
@@ -143,7 +149,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         Cumpleanios.setBackground(new java.awt.Color(12, 12, 22));
         Cumpleanios.setBorder(null);
         Cumpleanios.setForeground(new java.awt.Color(0, 0, 0));
-        Cumpleanios.setVisible(true);
+        Cumpleanios.setVisible(false);
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setBorder(null);
@@ -175,7 +181,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         CitasMedicas.setBackground(new java.awt.Color(12, 12, 22));
         CitasMedicas.setBorder(null);
         CitasMedicas.setForeground(new java.awt.Color(0, 0, 0));
-        CitasMedicas.setVisible(true);
+        CitasMedicas.setVisible(false);
 
         jScrollPane2.setBorder(null);
 
@@ -204,7 +210,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         Reuniones.setBackground(new java.awt.Color(12, 12, 22));
         Reuniones.setBorder(null);
         Reuniones.setForeground(new java.awt.Color(0, 0, 0));
-        Reuniones.setVisible(true);
+        Reuniones.setVisible(false);
 
         jScrollPane3.setBorder(null);
 
@@ -229,7 +235,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         Bodas.setBackground(new java.awt.Color(12, 12, 22));
         Bodas.setBorder(null);
         Bodas.setForeground(new java.awt.Color(0, 0, 0));
-        Bodas.setVisible(true);
+        Bodas.setVisible(false);
 
         jScrollPane4.setBorder(null);
 
@@ -254,7 +260,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         Otros.setBackground(new java.awt.Color(12, 12, 22));
         Otros.setBorder(null);
         Otros.setForeground(new java.awt.Color(0, 0, 0));
-        Otros.setVisible(true);
+        Otros.setVisible(false);
 
         jScrollPane5.setBorder(null);
 
@@ -295,6 +301,17 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+    }//GEN-LAST:event_formWindowClosing
+
+    
+    public void actualizar(){
+
+        
+
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -351,14 +368,14 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
     private javax.swing.JPanel eventosOtros;
     private javax.swing.JPanel eventosReuniones;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -382,7 +399,10 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
                 
                 
                 
-                detalle = new DetalleEvento(null, true, comando);
+                detalle = new DetalleEvento(null, true, comando, this);
+                
+                this.dispose();
+                
                 detalle.setLocationRelativeTo(null);
                 detalle.setVisible(true);
                 

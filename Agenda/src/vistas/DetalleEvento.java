@@ -29,13 +29,20 @@ public class DetalleEvento extends javax.swing.JDialog {
     private boolean editado;
     private String id;
     private Date date;
+    private MostrarEventos event;
     
-    public DetalleEvento(java.awt.Frame parent, boolean modal, String id) {
+    public DetalleEvento(java.awt.Frame parent, boolean modal, String id, MostrarEventos evt) {
         super(parent, modal);
         initComponents();
         
+        event = evt;
+        
         JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(this.horaS, "HH:mm");
+        JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(this.horaF, "HH:mm");
+        
         this.horaS.setEditor(timeEditor);
+        this.horaF.setEditor(timeEditor2);
+        
         date = new Date();
 
         datos = reg.detalle(id);
@@ -72,6 +79,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         
         this.horaS.setValue(date);
         this.categoria.setSelectedItem(datos[6]);
+        this.horaF.setValue(date);
         
         editado = false;
         this.guardar.setVisible(false);
@@ -113,12 +121,13 @@ public class DetalleEvento extends javax.swing.JDialog {
         editarCategoria1 = new javax.swing.JToggleButton();
         categoria = new javax.swing.JComboBox<>();
         horaS = new javax.swing.JSpinner();
+        horaF = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,7 +255,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         guardar.setForeground(new java.awt.Color(255, 255, 255));
         guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/savePq.png"))); // NOI18N
-        guardar.setText("GUARDAR CAMBIOS");
+        guardar.setText("GUARDAR CAMBIOS Y CERRAR");
         guardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
         guardar.setBorderPainted(false);
         guardar.setContentAreaFilled(false);
@@ -264,7 +273,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, 150, 30));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 220, 30));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -382,7 +391,11 @@ public class DetalleEvento extends javax.swing.JDialog {
 
         horaS.setModel(new SpinnerDateModel());
         horaS.setEnabled(false);
-        jPanel1.add(horaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 250, -1));
+        jPanel1.add(horaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 110, -1));
+
+        horaF.setModel(new SpinnerDateModel());
+        horaF.setEnabled(false);
+        jPanel1.add(horaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 110, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 560));
 
@@ -412,10 +425,12 @@ public class DetalleEvento extends javax.swing.JDialog {
     private void editarHoraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarHoraStateChanged
         if(this.editarHora.isSelected()){
             this.horaS.setEnabled(true);
+            this.horaF.setEnabled(true);
             editado = true;
             this.guardar.setVisible(true);
         }else{
             this.horaS.setEnabled(false);
+            this.horaF.setEnabled(false);
         }
     }//GEN-LAST:event_editarHoraStateChanged
 
@@ -471,16 +486,14 @@ public class DetalleEvento extends javax.swing.JDialog {
            datos[10] = this.Repetir.getSelectedItem().toString();
        }
        
-       reg.guardarCambios(this.id, datos, this.fecha.getCalendar());
+       reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
+       
+       Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
+       
+       event = new MostrarEventos(null, true);
+       event.setLocationRelativeTo(null);
+       event.setVisible(true);
     }//GEN-LAST:event_guardarActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if(editado){
-            JOptionPane.showMessageDialog(this, "Aún no se han guardado los cambios!");
-        }else{
-            this.dispose();
-        }
-    }//GEN-LAST:event_formWindowClosing
 
     private void guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseEntered
         this.guardar.setBorderPainted(true);
@@ -507,7 +520,12 @@ public class DetalleEvento extends javax.swing.JDialog {
         if(editado){
             JOptionPane.showMessageDialog(this, "Aún no se han guardado los cambios!");
         }else{
-            Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
+            
+            Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
+            
+            event = new MostrarEventos(null, true);
+            event.setLocationRelativeTo(null);
+            event.setVisible(true);
         }
         
     }//GEN-LAST:event_btnCerrarActionPerformed
@@ -553,6 +571,10 @@ public class DetalleEvento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_editarCategoria1ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -583,7 +605,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DetalleEvento dialog = new DetalleEvento(new javax.swing.JFrame(), true, "");
+                DetalleEvento dialog = new DetalleEvento(new javax.swing.JFrame(), true, "", null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -611,6 +633,7 @@ public class DetalleEvento extends javax.swing.JDialog {
     private javax.swing.JToggleButton editarTitulo;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton guardar;
+    private javax.swing.JSpinner horaF;
     private javax.swing.JSpinner horaS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -17,7 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import vistas.DetalleEvento;
 import vistas.MostrarEventos;
+import static vistas.MostrarEventos.componentes;
 import vistas.TarjetaEvento;
 
 /**
@@ -181,7 +183,7 @@ public class Registros {
     }
     
     
-    public void guardarCambios(String id, String[] datos, Calendar cal){
+    public void guardarCambios(String id, String[] datos, Calendar cal, MostrarEventos event){
         try {
             sql = "UPDATE eventos SET titulo = ?,dia=?, mes=?, anio=?, mesLetras=?, "
                     + "diaLetras=? ,fecha = ?, hora=?, categoria=?, descripcion=?, "
@@ -214,8 +216,9 @@ public class Registros {
             
             actualizarTarjeta(MostrarEventos.componentes, id, this.meses.get(datos[2]).toString(), 
                     this.diaSemana.get(datos[4]).toString() + ", "+datos[1], datos[0]);
-            
+                        
             JOptionPane.showMessageDialog(null, "Los cambios se guardaron exitosamente.");
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,5 +256,8 @@ public class Registros {
         fecha[1] = meses.get(mes).toString(); 
         
     }
+    
+    
+    
     
 }

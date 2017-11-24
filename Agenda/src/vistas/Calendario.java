@@ -6,6 +6,7 @@
 package vistas;
 
 import Animacion.Fade;
+import java.awt.Color;
 import java.awt.Font;
 
 /**
