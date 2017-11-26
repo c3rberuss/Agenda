@@ -7,6 +7,7 @@ package vistas;
 
 import Animacion.Fade;
 import java.awt.Color;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
@@ -33,20 +34,27 @@ public class AgregarEvento extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        btnCerrar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        titulo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        fecha = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        guardar = new javax.swing.JButton();
+        titulo = new javax.swing.JTextField();
+        fecha = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        hora = new javax.swing.JTextField();
+        horaS = new javax.swing.JSpinner();
+        horaF = new javax.swing.JSpinner();
+        lugar = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        categoria = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        categoria = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        SiRepetir = new javax.swing.JRadioButton();
+        NoRepetir = new javax.swing.JRadioButton();
+        Repetir = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        Guardar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -81,14 +89,162 @@ public class AgregarEvento extends javax.swing.JDialog {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 40));
 
-        btnCerrar.setBackground(new java.awt.Color(12, 12, 22));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("TITULO:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
+
+        titulo.setBackground(new java.awt.Color(12, 12, 22));
+        titulo.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        titulo.setForeground(new java.awt.Color(255, 255, 255));
+        titulo.setToolTipText("Nombre del evento");
+        titulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        titulo.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 250, 20));
+
+        fecha.setBackground(new java.awt.Color(0, 0, 0));
+        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        fecha.setToolTipText("Fecha de realizacion del evento");
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 250, -1));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("FECHA:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("HORA:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
+
+        horaS.setModel(new SpinnerDateModel());
+        horaS.setToolTipText("Hora inicio de evento");
+        horaS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0), 2));
+        jPanel1.add(horaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 110, 30));
+
+        horaF.setModel(new SpinnerDateModel());
+        horaF.setToolTipText("Hora fin de evento");
+        horaF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
+        jPanel1.add(horaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 110, 30));
+
+        lugar.setBackground(new java.awt.Color(12, 12, 22));
+        lugar.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lugar.setForeground(new java.awt.Color(255, 255, 255));
+        lugar.setToolTipText("Nombre del evento");
+        lugar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lugar.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel1.add(lugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, 250, 20));
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("LUGAR:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CATEGORIA:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+
+        categoria.setBackground(new java.awt.Color(0, 0, 0));
+        categoria.setForeground(new java.awt.Color(255, 255, 255));
+        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cumpleaños", "Citas Médicas", "Reuniones", "Bodas", "Otros" }));
+        categoria.setToolTipText("Categoria del evento");
+        jPanel1.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 210, 250, -1));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("REPETIR:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
+
+        SiRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        SiRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        SiRepetir.setForeground(new java.awt.Color(255, 255, 255));
+        SiRepetir.setText("SI");
+        SiRepetir.setEnabled(false);
+        SiRepetir.setFocusPainted(false);
+        SiRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                SiRepetirStateChanged(evt);
+            }
+        });
+        jPanel1.add(SiRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
+
+        NoRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        NoRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        NoRepetir.setForeground(new java.awt.Color(255, 255, 255));
+        NoRepetir.setSelected(true);
+        NoRepetir.setText("NO");
+        NoRepetir.setEnabled(false);
+        NoRepetir.setFocusPainted(false);
+        NoRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                NoRepetirStateChanged(evt);
+            }
+        });
+        jPanel1.add(NoRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, -1, -1));
+
+        Repetir.setBackground(new java.awt.Color(12, 12, 22));
+        Repetir.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        Repetir.setForeground(new java.awt.Color(255, 255, 255));
+        Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
+        Repetir.setSelectedIndex(1);
+        Repetir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Repetir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, 120, -1));
+
+        descripcion.setBackground(new java.awt.Color(12, 12, 22));
+        descripcion.setColumns(20);
+        descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        descripcion.setRows(5);
+        descripcion.setToolTipText("Agregue una descripcion del evento");
+        jScrollPane1.setViewportView(descripcion);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 248, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("DESCRIPCION:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, -1, -1));
+
+        Guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Guardar.setForeground(new java.awt.Color(255, 255, 255));
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/save.png"))); // NOI18N
+        Guardar.setText("GUARDAR");
+        Guardar.setToolTipText("Guardar mis datos");
+        Guardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
+        Guardar.setBorderPainted(false);
+        Guardar.setContentAreaFilled(false);
+        Guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Guardar.setFocusPainted(false);
+        Guardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/savePq.png"))); // NOI18N
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                GuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                GuardarMouseExited(evt);
+            }
+        });
+        jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 120, 30));
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("MI NUEVO EVENTO");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 950, 30));
+
+        btnCerrar.setBackground(new java.awt.Color(102, 0, 0));
         btnCerrar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/close.png"))); // NOI18N
         btnCerrar.setText("CERRAR");
         btnCerrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         btnCerrar.setBorderPainted(false);
+        btnCerrar.setContentAreaFilled(false);
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrar.setFocusPainted(false);
+        btnCerrar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/closePeque.png"))); // NOI18N
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCerrarMouseEntered(evt);
@@ -104,122 +260,38 @@ public class AgregarEvento extends javax.swing.JDialog {
         });
         jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, 80, 30));
 
-        jPanel3.setBackground(new java.awt.Color(12, 12, 22));
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-
-        titulo.setEditable(false);
-
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel1.setText("TITULO");
-
-        fecha.setEditable(false);
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel3.setText("FECHA");
-
-        guardar.setText("GUARDAR EVENTO");
-        guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel4.setText("DESCRIPCION");
-
-        hora.setEditable(false);
-
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel5.setText("HORA");
-
-        categoria.setEditable(false);
-
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        jLabel6.setText("CATEGORIA");
-
-        descripcion.setBackground(new java.awt.Color(12, 12, 22));
-        descripcion.setColumns(20);
-        descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
-        descripcion.setForeground(new java.awt.Color(255, 255, 255));
-        descripcion.setRows(5);
-        jScrollPane1.setViewportView(descripcion);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fecha)
-                            .addComponent(titulo)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel4)))
-                        .addGap(45, 45, 45)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                            .addComponent(categoria)
-                            .addComponent(hora))))
-                .addGap(156, 156, 156))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(guardar)
-                .addGap(23, 23, 23))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(45, 45, 45)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(guardar)
-                .addGap(16, 16, 16))
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 578, 470));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX()- x , this.getLocation().y + evt.getY() - y );
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
+
+    private void SiRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SiRepetirStateChanged
+
+    }//GEN-LAST:event_SiRepetirStateChanged
+
+    private void NoRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NoRepetirStateChanged
+
+    }//GEN-LAST:event_NoRepetirStateChanged
+
+    private void GuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseEntered
+        this.Guardar.setBorderPainted(true);
+    }//GEN-LAST:event_GuardarMouseEntered
+
+    private void GuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseExited
+        this.Guardar.setBorderPainted(false);
+    }//GEN-LAST:event_GuardarMouseExited
+
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
         this.btnCerrar.setBorderPainted(true);
-        
     }//GEN-LAST:event_btnCerrarMouseEntered
 
     private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
@@ -229,19 +301,6 @@ public class AgregarEvento extends javax.swing.JDialog {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
     }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        
-    }//GEN-LAST:event_guardarActionPerformed
-
-    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
-        this.setLocation(this.getLocation().x + evt.getX()- x , this.getLocation().y + evt.getY() - y );
-    }//GEN-LAST:event_jPanel2MouseDragged
-
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-       x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jPanel2MousePressed
 
     /**
      * @param args the command line arguments
@@ -286,22 +345,29 @@ public class AgregarEvento extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Guardar;
+    private javax.swing.JRadioButton NoRepetir;
+    private javax.swing.JComboBox<String> Repetir;
+    private javax.swing.JRadioButton SiRepetir;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JTextField categoria;
+    private javax.swing.JComboBox<String> categoria;
     private javax.swing.JTextArea descripcion;
-    private javax.swing.JTextField fecha;
-    private javax.swing.JButton guardar;
-    private javax.swing.JTextField hora;
+    private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.JSpinner horaF;
+    private javax.swing.JSpinner horaS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField lugar;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,6 +36,13 @@ public class Perfil extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fecha = new com.toedter.calendar.JDateChooser();
+        Nombre = new javax.swing.JTextField();
+        categoria = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        Guardar = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -105,10 +112,77 @@ public class Perfil extends javax.swing.JDialog {
         });
         jPanel3.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 470, 80, 30));
 
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("<html>MI FECHA DE <br>NACIMIENTO:");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 90, 50));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("MI NOMBRE:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 90, 20));
+
+        fecha.setBackground(new java.awt.Color(12, 12, 22));
+        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 250, -1));
+
+        Nombre.setBackground(new java.awt.Color(12, 12, 22));
+        Nombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Nombre.setForeground(new java.awt.Color(255, 255, 255));
+        Nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Nombre.setCaretColor(new java.awt.Color(255, 255, 255));
+        Nombre.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jPanel3.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 250, 20));
+
+        categoria.setBackground(new java.awt.Color(12, 12, 22));
+        categoria.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        categoria.setForeground(new java.awt.Color(255, 255, 255));
+        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cumpleaños", "Citas Médicas", "Reuniones", "Bodas", "Otros" }));
+        categoria.setBorder(null);
+        categoria.setEnabled(false);
+        jPanel3.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 250, -1));
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("CATEGORIA:");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, 20));
+
+        Guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Guardar.setForeground(new java.awt.Color(255, 255, 255));
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/save.png"))); // NOI18N
+        Guardar.setText("GUARDAR");
+        Guardar.setToolTipText("Guardar mis datos");
+        Guardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
+        Guardar.setBorderPainted(false);
+        Guardar.setContentAreaFilled(false);
+        Guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Guardar.setFocusPainted(false);
+        Guardar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/savePq.png"))); // NOI18N
+        Guardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                GuardarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                GuardarMouseExited(evt);
+            }
+        });
+        jPanel3.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 120, 30));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
+        this.setLocation(this.getLocation().x + evt.getX()- x , this.getLocation().y + evt.getY() - y );
+    }//GEN-LAST:event_jPanel2MouseDragged
+
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPanel2MousePressed
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
         this.btnCerrar.setBorderPainted(true);
@@ -122,14 +196,13 @@ public class Perfil extends javax.swing.JDialog {
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
-       this.setLocation(this.getLocation().x + evt.getX()- x , this.getLocation().y + evt.getY() - y );
-    }//GEN-LAST:event_jPanel2MouseDragged
+    private void GuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseEntered
+        this.Guardar.setBorderPainted(true);
+    }//GEN-LAST:event_GuardarMouseEntered
 
-    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-        x = evt.getX();
-        y = evt.getY();
-    }//GEN-LAST:event_jPanel2MousePressed
+    private void GuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseExited
+        this.Guardar.setBorderPainted(false);
+    }//GEN-LAST:event_GuardarMouseExited
 
     /**
      * @param args the command line arguments
@@ -174,8 +247,15 @@ public class Perfil extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Guardar;
+    private javax.swing.JTextField Nombre;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JComboBox<String> categoria;
+    private com.toedter.calendar.JDateChooser fecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

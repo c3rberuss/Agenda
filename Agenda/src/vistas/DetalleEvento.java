@@ -122,6 +122,8 @@ public class DetalleEvento extends javax.swing.JDialog {
         categoria = new javax.swing.JComboBox<>();
         horaS = new javax.swing.JSpinner();
         horaF = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        lugar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -142,40 +144,44 @@ public class DetalleEvento extends javax.swing.JDialog {
         descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(255, 255, 255));
         descripcion.setRows(5);
+        descripcion.setToolTipText("Agregue una descripcion del evento");
         jScrollPane1.setViewportView(descripcion);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 248, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 248, -1));
 
         titulo.setEditable(false);
         titulo.setBackground(new java.awt.Color(12, 12, 22));
         titulo.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 90, 250, -1));
+        titulo.setToolTipText("Nombre del evento");
+        titulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        titulo.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 250, 20));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("TITULO:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("FECHA:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("DESCRIPCION:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("HORA:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("CATEGORIA:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, -1, -1));
 
         editarTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -189,7 +195,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarTituloStateChanged(evt);
             }
         });
-        jPanel1.add(editarTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 40, 20));
+        jPanel1.add(editarTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 40, 20));
 
         editarHora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarHora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -203,7 +209,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarHoraStateChanged(evt);
             }
         });
-        jPanel1.add(editarHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, 40, 20));
+        jPanel1.add(editarHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 40, 20));
 
         editarFecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -217,7 +223,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarFechaStateChanged(evt);
             }
         });
-        jPanel1.add(editarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 40, 20));
+        jPanel1.add(editarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 40, 20));
 
         editarDescripcion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -231,7 +237,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarDescripcionStateChanged(evt);
             }
         });
-        jPanel1.add(editarDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 40, 20));
+        jPanel1.add(editarDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 40, 20));
 
         editarRepetir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarRepetir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -250,7 +256,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarRepetirActionPerformed(evt);
             }
         });
-        jPanel1.add(editarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, 40, 20));
+        jPanel1.add(editarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 40, 20));
 
         guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         guardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -259,6 +265,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         guardar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0)));
         guardar.setBorderPainted(false);
         guardar.setContentAreaFilled(false);
+        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar.setFocusPainted(false);
         guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -273,12 +280,12 @@ public class DetalleEvento extends javax.swing.JDialog {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 220, 30));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 220, 30));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("REPETIR:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
 
         btnCerrar.setBackground(new java.awt.Color(102, 0, 0));
         btnCerrar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -304,7 +311,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 btnCerrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 510, 90, 30));
+        jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 580, 90, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -325,44 +332,50 @@ public class DetalleEvento extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("DATOS DE MI EVENTO");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 6, 570, 30));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 6, 550, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 40));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 40));
 
         fecha.setBackground(new java.awt.Color(0, 0, 0));
         fecha.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 250, -1));
+        fecha.setToolTipText("Fecha de realizacion del evento");
+        jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, -1));
 
-        NoRepetir.setBackground(new java.awt.Color(0, 0, 0));
-        buttonGroup1.add(NoRepetir);
+        NoRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        NoRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         NoRepetir.setForeground(new java.awt.Color(255, 255, 255));
         NoRepetir.setSelected(true);
         NoRepetir.setText("NO");
         NoRepetir.setEnabled(false);
+        NoRepetir.setFocusPainted(false);
         NoRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 NoRepetirStateChanged(evt);
             }
         });
-        jPanel1.add(NoRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, -1, -1));
+        jPanel1.add(NoRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, -1));
 
-        SiRepetir.setBackground(new java.awt.Color(0, 0, 0));
-        buttonGroup1.add(SiRepetir);
+        SiRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        SiRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         SiRepetir.setForeground(new java.awt.Color(255, 255, 255));
         SiRepetir.setText("SI");
         SiRepetir.setEnabled(false);
+        SiRepetir.setFocusPainted(false);
         SiRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SiRepetirStateChanged(evt);
             }
         });
-        jPanel1.add(SiRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, -1, -1));
+        jPanel1.add(SiRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
 
-        Repetir.setBackground(new java.awt.Color(0, 0, 0));
+        Repetir.setBackground(new java.awt.Color(12, 12, 22));
+        Repetir.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Repetir.setForeground(new java.awt.Color(255, 255, 255));
         Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
         Repetir.setSelectedIndex(1);
-        jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 330, 120, -1));
+        Repetir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Repetir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 120, -1));
 
         editarCategoria1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
         editarCategoria1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -381,26 +394,49 @@ public class DetalleEvento extends javax.swing.JDialog {
                 editarCategoria1ActionPerformed(evt);
             }
         });
-        jPanel1.add(editarCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 40, 20));
+        jPanel1.add(editarCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 40, 20));
 
         categoria.setBackground(new java.awt.Color(0, 0, 0));
         categoria.setForeground(new java.awt.Color(255, 255, 255));
         categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cumpleaños", "Citas Médicas", "Reuniones", "Bodas", "Otros" }));
+        categoria.setToolTipText("Categoria del evento");
         categoria.setEnabled(false);
-        jPanel1.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 250, -1));
+        jPanel1.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 250, -1));
 
         horaS.setModel(new SpinnerDateModel());
+        horaS.setToolTipText("Hora inicio de evento");
+        horaS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 0), 2));
         horaS.setEnabled(false);
-        jPanel1.add(horaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 110, -1));
+        jPanel1.add(horaS, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 110, 30));
 
         horaF.setModel(new SpinnerDateModel());
+        horaF.setToolTipText("Hora fin de evento");
+        horaF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 2));
         horaF.setEnabled(false);
-        jPanel1.add(horaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 110, -1));
+        jPanel1.add(horaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, 110, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 560));
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("LUGAR:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
+
+        lugar.setEditable(false);
+        lugar.setBackground(new java.awt.Color(12, 12, 22));
+        lugar.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
+        lugar.setForeground(new java.awt.Color(255, 255, 255));
+        lugar.setToolTipText("Nombre del evento");
+        lugar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lugar.setCaretColor(new java.awt.Color(255, 255, 255));
+        jPanel1.add(lugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 250, 20));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
 
     private void editarTituloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarTituloStateChanged
         if(this.editarTitulo.isSelected()){
@@ -411,16 +447,6 @@ public class DetalleEvento extends javax.swing.JDialog {
             this.titulo.setEditable(false);
         }
     }//GEN-LAST:event_editarTituloStateChanged
-
-    private void editarFechaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarFechaStateChanged
-        if(this.editarFecha.isSelected()){
-             this.fecha.setEnabled(true);
-             editado = true;
-             this.guardar.setVisible(true);
-        }else{
-             this.fecha.setEnabled(false);
-        }
-    }//GEN-LAST:event_editarFechaStateChanged
 
     private void editarHoraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarHoraStateChanged
         if(this.editarHora.isSelected()){
@@ -434,15 +460,15 @@ public class DetalleEvento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_editarHoraStateChanged
 
-    private void editarRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarRepetirStateChanged
-        if(this.editarRepetir.isSelected()){
-            this.NoRepetir.setEnabled(true);
-            this.SiRepetir.setEnabled(true);
+    private void editarFechaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarFechaStateChanged
+        if(this.editarFecha.isSelected()){
+            this.fecha.setEnabled(true);
+            editado = true;
+            this.guardar.setVisible(true);
         }else{
-            this.NoRepetir.setEnabled(true);
-            this.SiRepetir.setEnabled(true);
+            this.fecha.setEnabled(false);
         }
-    }//GEN-LAST:event_editarRepetirStateChanged
+    }//GEN-LAST:event_editarFechaStateChanged
 
     private void editarDescripcionStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarDescripcionStateChanged
         if(this.editarDescripcion.isSelected()){
@@ -454,46 +480,19 @@ public class DetalleEvento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_editarDescripcionStateChanged
 
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-       editado = false;
-       
-       datos = new String[11];
-       
-       datos[0] = this.titulo.getText();
-       
-       datos[1] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-       datos[2] = String.valueOf(this.fecha.getCalendar().get(Calendar.MONTH));
-       datos[3] = String.valueOf(this.fecha.getCalendar().get(Calendar.YEAR));
-       datos[4] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
-       
-       
-       int mes = Integer.valueOf(datos[2])+1;
-       
-       datos[5] = datos[1]+"/"+String.valueOf(mes)+"/"+datos[3];
-       
-       date = (Date) this.horaS.getValue();
-       DateFormat hourFormat = new SimpleDateFormat("HH:mm");
-       datos[6] = hourFormat.format(date);
-       
-       datos[7] = this.categoria.getSelectedItem().toString();
-       datos[8] = this.descripcion.getText();
-       
-       if(this.NoRepetir.isSelected()){
-           datos[9] = this.NoRepetir.getText();
-           datos[10] = "NULL";
-       }else{
-           datos[9] = this.SiRepetir.getText();
-           datos[10] = this.Repetir.getSelectedItem().toString();
-       }
-       
-       reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
-       
-       Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
-       
-       event = new MostrarEventos(null, true);
-       event.setLocationRelativeTo(null);
-       event.setVisible(true);
-    }//GEN-LAST:event_guardarActionPerformed
+    private void editarRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarRepetirStateChanged
+        if(this.editarRepetir.isSelected()){
+            this.NoRepetir.setEnabled(true);
+            this.SiRepetir.setEnabled(true);
+        }else{
+            this.NoRepetir.setEnabled(true);
+            this.SiRepetir.setEnabled(true);
+        }
+    }//GEN-LAST:event_editarRepetirStateChanged
+
+    private void editarRepetirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarRepetirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarRepetirActionPerformed
 
     private void guardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMouseEntered
         this.guardar.setBorderPainted(true);
@@ -503,9 +502,45 @@ public class DetalleEvento extends javax.swing.JDialog {
         this.guardar.setBorderPainted(false);
     }//GEN-LAST:event_guardarMouseExited
 
-    private void editarRepetirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarRepetirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editarRepetirActionPerformed
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        editado = false;
+
+        datos = new String[11];
+
+        datos[0] = this.titulo.getText();
+
+        datos[1] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+        datos[2] = String.valueOf(this.fecha.getCalendar().get(Calendar.MONTH));
+        datos[3] = String.valueOf(this.fecha.getCalendar().get(Calendar.YEAR));
+        datos[4] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+
+        int mes = Integer.valueOf(datos[2])+1;
+
+        datos[5] = datos[1]+"/"+String.valueOf(mes)+"/"+datos[3];
+
+        date = (Date) this.horaS.getValue();
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        datos[6] = hourFormat.format(date);
+
+        datos[7] = this.categoria.getSelectedItem().toString();
+        datos[8] = this.descripcion.getText();
+
+        if(this.NoRepetir.isSelected()){
+            datos[9] = this.NoRepetir.getText();
+            datos[10] = "NULL";
+        }else{
+            datos[9] = this.SiRepetir.getText();
+            datos[10] = this.Repetir.getSelectedItem().toString();
+        }
+
+        reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
+
+        Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
+
+        event = new MostrarEventos(null, true);
+        event.setLocationRelativeTo(null);
+        event.setVisible(true);
+    }//GEN-LAST:event_guardarActionPerformed
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
         this.btnCerrar.setBorderPainted(true);
@@ -520,14 +555,14 @@ public class DetalleEvento extends javax.swing.JDialog {
         if(editado){
             JOptionPane.showMessageDialog(this, "Aún no se han guardado los cambios!");
         }else{
-            
+
             Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
-            
+
             event = new MostrarEventos(null, true);
             event.setLocationRelativeTo(null);
             event.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
@@ -535,13 +570,13 @@ public class DetalleEvento extends javax.swing.JDialog {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
-         x = evt.getX();
+        x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void NoRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NoRepetirStateChanged
         if(this.NoRepetir.isSelected()){
-             this.Repetir.setEnabled(false);
+            this.Repetir.setEnabled(false);
             this.Repetir.setVisible(false);
             editado = true;
             this.guardar.setVisible(true);
@@ -570,10 +605,6 @@ public class DetalleEvento extends javax.swing.JDialog {
     private void editarCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoria1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editarCategoria1ActionPerformed
-
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-
-    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -642,9 +673,11 @@ public class DetalleEvento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField lugar;
     private javax.swing.JTextField titulo;
     // End of variables declaration//GEN-END:variables
 }

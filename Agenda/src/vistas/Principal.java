@@ -177,6 +177,11 @@ public class Principal extends javax.swing.JFrame {
                 BtnApuntesMouseExited(evt);
             }
         });
+        BtnApuntes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnApuntesActionPerformed(evt);
+            }
+        });
 
         BtnEventos.setBackground(new java.awt.Color(0, 0, 0));
         BtnEventos.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
@@ -441,6 +446,11 @@ public class Principal extends javax.swing.JFrame {
         Perfil per = new Perfil(this,true);
         per.setVisible(true);
     }//GEN-LAST:event_BtnPerfilActionPerformed
+
+    private void BtnApuntesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnApuntesActionPerformed
+        OpcionesNotas OpNo = new OpcionesNotas(new javax.swing.JDialog(),true);
+        OpNo.setVisible(true);
+    }//GEN-LAST:event_BtnApuntesActionPerformed
 
     /**
      * @param args the command line arguments
