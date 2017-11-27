@@ -14,7 +14,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -39,10 +41,12 @@ public class SegundoPlano implements Runnable{
     private AudioInputStream ais;
     private BufferedInputStream bis; 
     private Notificacion noti;
+    private Registros reg;
     
    
     public SegundoPlano(){
         try {
+            reg = new Registros();
             System.out.println(this.getClass().getResource("/recursos/sonidos/notificacion.wav"));
             bis = new BufferedInputStream(getClass().getResourceAsStream("/recursos/sonidos/notificacion.wav"));
             ais = AudioSystem.getAudioInputStream(bis);
@@ -118,7 +122,21 @@ public class SegundoPlano implements Runnable{
             while(result.next()){
                 notificar();
                 entro = true;
-                System.out.println("Entro al ciclo");
+                
+                if(result.getString("repetir").equalsIgnoreCase("si")){
+                    
+                    sql = "UPDATE eventos SET fecha=? where id=?";
+                    
+                    String tmpFecha = repetir(result.getString("repeticion"), result.getString("fecha"));
+                    
+                    statement = this.db.prepareStatement(sql);
+                    statement.setString(1, tmpFecha);
+                    statement.setString(2, result.getString("id"));
+                    statement.executeUpdate();
+                    
+                    reg.actualizarFecha(result.getString("id"), tmpFecha);
+                }
+                
             }
             
         } catch (SQLException ex) {
@@ -158,7 +176,6 @@ public class SegundoPlano implements Runnable{
             try {
                 fecha = new String[2];
                 fecha = mostrarHora();
-                //notificar();
                 
                if( !buscarEventos(fecha[0], fecha[1])){
                    Thread.sleep(9450);
@@ -171,6 +188,63 @@ public class SegundoPlano implements Runnable{
                 Logger.getLogger(SegundoPlano.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    
+    public String repetir(String frecuencia, String fecha){
+        
+        int dia, mes, anio;
+        String fechaFormato = null;
+        Date date = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        
+        dia = Integer.valueOf(fecha.substring(0, 2));
+        mes = Integer.valueOf(fecha.substring(3, 5)) - 1;
+        
+        switch(frecuencia.toLowerCase()){
+            case "diario":
+                
+                dia = dia + 1;
+                date.setDate(dia);
+                date.setMonth(mes);
+                
+                fechaFormato = formato.format(date);
+                
+                break;
+
+            case "semanal":
+                
+                dia = dia + 7;
+                date.setDate(dia);
+                date.setMonth(mes);
+                
+                fechaFormato = formato.format(date);
+                
+                break;
+                
+            case "mensual":
+                
+                mes = mes + 1;
+                date.setDate(dia);
+                date.setMonth(mes);
+                
+                
+                fechaFormato = formato.format(date);
+                
+                break;
+                
+            case "anual":
+                
+                mes = mes + 12;
+                date.setDate(dia);
+                date.setMonth(mes);
+                
+                fechaFormato = formato.format(date);
+                
+                break;
+        }
+        
+        return fechaFormato;
     }
     
 }

@@ -46,6 +46,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         date = new Date();
 
         datos = reg.detalle(id);
+        
         this.id = id;
         
         if(datos[7].equalsIgnoreCase("NO")){
@@ -80,6 +81,8 @@ public class DetalleEvento extends javax.swing.JDialog {
         this.horaS.setValue(date);
         this.categoria.setSelectedItem(datos[6]);
         this.horaF.setValue(date);
+        
+        this.lugar.setText(datos[9]);
         
         editado = false;
         this.guardar.setVisible(false);
@@ -118,12 +121,13 @@ public class DetalleEvento extends javax.swing.JDialog {
         NoRepetir = new javax.swing.JRadioButton();
         SiRepetir = new javax.swing.JRadioButton();
         Repetir = new javax.swing.JComboBox<>();
-        editarCategoria1 = new javax.swing.JToggleButton();
+        editarLugar = new javax.swing.JToggleButton();
         categoria = new javax.swing.JComboBox<>();
         horaS = new javax.swing.JSpinner();
         horaF = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         lugar = new javax.swing.JTextField();
+        editarCategoria2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -342,6 +346,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         jPanel1.add(fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 250, -1));
 
         NoRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        buttonGroup1.add(NoRepetir);
         NoRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         NoRepetir.setForeground(new java.awt.Color(255, 255, 255));
         NoRepetir.setSelected(true);
@@ -356,6 +361,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         jPanel1.add(NoRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, -1, -1));
 
         SiRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        buttonGroup1.add(SiRepetir);
         SiRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         SiRepetir.setForeground(new java.awt.Color(255, 255, 255));
         SiRepetir.setText("SI");
@@ -377,24 +383,24 @@ public class DetalleEvento extends javax.swing.JDialog {
         Repetir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 120, -1));
 
-        editarCategoria1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
-        editarCategoria1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        editarCategoria1.setBorderPainted(false);
-        editarCategoria1.setContentAreaFilled(false);
-        editarCategoria1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editarCategoria1.setFocusPainted(false);
-        editarCategoria1.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
-        editarCategoria1.addChangeListener(new javax.swing.event.ChangeListener() {
+        editarLugar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarLugar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarLugar.setBorderPainted(false);
+        editarLugar.setContentAreaFilled(false);
+        editarLugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarLugar.setFocusPainted(false);
+        editarLugar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
+        editarLugar.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                editarCategoria1StateChanged(evt);
+                editarLugarStateChanged(evt);
             }
         });
-        editarCategoria1.addActionListener(new java.awt.event.ActionListener() {
+        editarLugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editarCategoria1ActionPerformed(evt);
+                editarLugarActionPerformed(evt);
             }
         });
-        jPanel1.add(editarCategoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 40, 20));
+        jPanel1.add(editarLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 40, 20));
 
         categoria.setBackground(new java.awt.Color(0, 0, 0));
         categoria.setForeground(new java.awt.Color(255, 255, 255));
@@ -428,6 +434,25 @@ public class DetalleEvento extends javax.swing.JDialog {
         lugar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         lugar.setCaretColor(new java.awt.Color(255, 255, 255));
         jPanel1.add(lugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 250, 20));
+
+        editarCategoria2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
+        editarCategoria2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        editarCategoria2.setBorderPainted(false);
+        editarCategoria2.setContentAreaFilled(false);
+        editarCategoria2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        editarCategoria2.setFocusPainted(false);
+        editarCategoria2.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
+        editarCategoria2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                editarCategoria2StateChanged(evt);
+            }
+        });
+        editarCategoria2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarCategoria2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(editarCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 40, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 620));
 
@@ -505,7 +530,7 @@ public class DetalleEvento extends javax.swing.JDialog {
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         editado = false;
 
-        datos = new String[11];
+        datos = new String[12];
 
         datos[0] = this.titulo.getText();
 
@@ -532,6 +557,8 @@ public class DetalleEvento extends javax.swing.JDialog {
             datos[9] = this.SiRepetir.getText();
             datos[10] = this.Repetir.getSelectedItem().toString();
         }
+        
+        datos[11] = this.lugar.getText();
 
         reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
 
@@ -592,19 +619,27 @@ public class DetalleEvento extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_SiRepetirStateChanged
 
-    private void editarCategoria1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarCategoria1StateChanged
-        if(this.editarCategoria1.isSelected()){
-            this.categoria.setEnabled(true);
+    private void editarLugarStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarLugarStateChanged
+        if(this.editarLugar.isSelected()){
+            this.lugar.setEditable(true);
             editado = true;
             this.guardar.setVisible(true);
         }else{
-            this.categoria.setEnabled(false);
+            this.lugar.setEditable(false);
         }
-    }//GEN-LAST:event_editarCategoria1StateChanged
+    }//GEN-LAST:event_editarLugarStateChanged
 
-    private void editarCategoria1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoria1ActionPerformed
+    private void editarLugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarLugarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_editarCategoria1ActionPerformed
+    }//GEN-LAST:event_editarLugarActionPerformed
+
+    private void editarCategoria2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarCategoria2StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarCategoria2StateChanged
+
+    private void editarCategoria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoria2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editarCategoria2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,10 +691,11 @@ public class DetalleEvento extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> categoria;
     private javax.swing.JTextArea descripcion;
-    private javax.swing.JToggleButton editarCategoria1;
+    private javax.swing.JToggleButton editarCategoria2;
     private javax.swing.JToggleButton editarDescripcion;
     private javax.swing.JToggleButton editarFecha;
     private javax.swing.JToggleButton editarHora;
+    private javax.swing.JToggleButton editarLugar;
     private javax.swing.JToggleButton editarRepetir;
     private javax.swing.JToggleButton editarTitulo;
     private com.toedter.calendar.JDateChooser fecha;

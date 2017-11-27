@@ -9,7 +9,9 @@ import java.awt.GridBagConstraints;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,9 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import vistas.DetalleEvento;
 import vistas.MostrarEventos;
-import static vistas.MostrarEventos.componentes;
 import vistas.TarjetaEvento;
 
 /**
@@ -147,13 +147,13 @@ public class Registros {
     
     }
     
-    String[] datos = new String[9];
+    String[] datos = new String[10];
     public String[] detalle(String id){
         
         try {
             
             
-            sql = "SELECT titulo, descripcion, dia, mes, anio, hora, categoria, repetir, repeticion "
+            sql = "SELECT titulo, descripcion, dia, mes, anio, hora, categoria, repetir, repeticion, lugar "
                     + "from eventos where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
@@ -172,6 +172,7 @@ public class Registros {
                 datos[6] = rs.getString("categoria");
                 datos[7] = rs.getString("repetir");
                 datos[8] = rs.getString("repeticion");
+                datos[9] = rs.getString("lugar");
                 
             }
             
@@ -187,7 +188,7 @@ public class Registros {
         try {
             sql = "UPDATE eventos SET titulo = ?,dia=?, mes=?, anio=?, mesLetras=?, "
                     + "diaLetras=? ,fecha = ?, hora=?, categoria=?, descripcion=?, "
-                    + "repetir=?, repeticion=? where id=?";
+                    + "repetir=?, repeticion=?, lugar=? where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
             
@@ -208,8 +209,9 @@ public class Registros {
             statement.setString(10, datos[8]);
             statement.setString(11, datos[9]);
             statement.setString(12, datos[10]);
+            statement.setString(13, datos[11]);
             
-            statement.setString(13, id);
+            statement.setString(14, id);
             
             statement.executeUpdate();
             
@@ -243,6 +245,43 @@ public class Registros {
                 ((TarjetaEvento)entry.getValue()).updateUI();
             }
         }
+        
+    }
+    
+    public void actualizarFecha(String id, String fecha){
+        
+        int dia, mes, anio, diaSem;
+        String fechaFormato = null;
+        Date date = new Date();
+        
+        dia = Integer.valueOf(fecha.substring(0, 2));
+        mes = Integer.valueOf(fecha.substring(3, 5)) - 1;
+        anio = Integer.valueOf(fecha.substring(6));
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(anio, mes, dia);
+        diaSem = cal.get(Calendar.DAY_OF_WEEK);
+        
+        sql = "UPDATE eventos SET dia=?, mes=?, anio=?, diaLetra=?, mesLetras=? WHERE id=?";
+        
+        try {
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setInt(1, dia);
+            statement.setInt(2, mes);
+            statement.setInt(3, anio);
+            
+            statement.setString(4, diaSemana.get(String.valueOf(diaSem)).toString()+", "+dia);
+            statement.setString(5, meses.get(String.valueOf(mes)).toString());
+            
+            statement.setString(6, id);
+            
+            statement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }
     
