@@ -40,8 +40,6 @@ public class Perfil extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         fecha = new com.toedter.calendar.JDateChooser();
         Nombre = new javax.swing.JTextField();
-        categoria = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         Guardar = new javax.swing.JButton();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,19 +133,6 @@ public class Perfil extends javax.swing.JDialog {
         Nombre.setCaretColor(new java.awt.Color(255, 255, 255));
         Nombre.setDisabledTextColor(new java.awt.Color(204, 204, 204));
         jPanel3.add(Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 250, 20));
-
-        categoria.setBackground(new java.awt.Color(12, 12, 22));
-        categoria.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        categoria.setForeground(new java.awt.Color(255, 255, 255));
-        categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cumpleaños", "Citas Médicas", "Reuniones", "Bodas", "Otros" }));
-        categoria.setBorder(null);
-        categoria.setEnabled(false);
-        jPanel3.add(categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 250, -1));
-
-        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("CATEGORIA:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, 20));
 
         Guardar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         Guardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -250,12 +235,10 @@ public class Perfil extends javax.swing.JDialog {
     private javax.swing.JButton Guardar;
     private javax.swing.JTextField Nombre;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JComboBox<String> categoria;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
