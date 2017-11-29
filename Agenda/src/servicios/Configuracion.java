@@ -81,7 +81,7 @@ public class Configuracion {
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection("jdbc:sqlite:"+rootPath+separador+"agenda.db"); 
             
-            String sql = "CREATE TABLE `eventos` (\n" +
+            String sql ="CREATE TABLE `eventos` (\n" +
                         "	`titulo`	TEXT,\n" +
                         "	`descripcion`	TEXT,\n" +
                         "	`fecha`	TEXT,\n" +
@@ -95,7 +95,9 @@ public class Configuracion {
                         "	`anio`	INTEGER,\n" +
                         "	`diaLetras`	TEXT,\n" +
                         "	`mesLetras`	TEXT,\n" +
-                        "	`repeticion`	TEXT\n" +
+                        "	`repeticion`	TEXT,\n" +
+                        "	`lugar`	TEXT,\n" +
+                        "	`diaSemana`	INTEGER\n" +
                         ");";
             
             PreparedStatement statement = con.prepareStatement(sql);

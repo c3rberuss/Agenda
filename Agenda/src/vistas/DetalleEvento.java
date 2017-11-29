@@ -564,7 +564,7 @@ public class DetalleEvento extends javax.swing.JDialog {
 
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
 
-        event = new MostrarEventos(null, true);
+        event = new MostrarEventos(null, true, "General");
         event.setLocationRelativeTo(null);
         event.setVisible(true);
     }//GEN-LAST:event_guardarActionPerformed
@@ -585,7 +585,7 @@ public class DetalleEvento extends javax.swing.JDialog {
 
             Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
 
-            event = new MostrarEventos(null, true);
+            event = new MostrarEventos(null, true, "General");
             event.setLocationRelativeTo(null);
             event.setVisible(true);
         }

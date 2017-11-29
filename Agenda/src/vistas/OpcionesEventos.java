@@ -14,11 +14,14 @@ import Animacion.Fade;
 public class OpcionesEventos extends javax.swing.JDialog {
 
     int x,y;
+    public static MostrarEventos eventos;
+    
+    
     public OpcionesEventos(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        eventos = new MostrarEventos(this, true, "General");
     }
 
     /**
@@ -175,8 +178,8 @@ public class OpcionesEventos extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnVerMouseExited
 
     private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
-        MostrarEventos Ver = new MostrarEventos(new javax.swing.JDialog(),true);
-        Ver.setVisible(true);
+
+        this.eventos.setVisible(true);
     }//GEN-LAST:event_BtnVerActionPerformed
 
     private void BtnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCerrarMouseEntered

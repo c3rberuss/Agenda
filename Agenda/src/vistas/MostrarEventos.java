@@ -27,32 +27,33 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
     public static Map componentes;
     private DetalleEvento detalle;
     
-    public MostrarEventos(java.awt.Dialog parent, boolean modal) {
+    public MostrarEventos(java.awt.Dialog parent, boolean modal, String orden) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.Odenar.setSelectedItem(orden);
         
         componentes = new HashMap();
 
         reg = new Registros();
         
-        if(reg.cargarTarjetas(this.eventosCumple, this.componentes, this, "Cumpleaños") < 1){
+        if(reg.cargarTarjetas(this.eventosCumple, this.componentes, this, "Cumpleaños", this.Odenar.getSelectedItem().toString()) < 1){
             this.jTabbedPane1.remove(this.Cumpleanios);
         }
         
-        if(reg.cargarTarjetas(eventosCitas, componentes, this, "Citas Médicas") < 1){
+        if(reg.cargarTarjetas(eventosCitas, componentes, this, "Citas Médicas", this.Odenar.getSelectedItem().toString()) < 1){
             this.jTabbedPane1.remove(this.CitasMedicas);
         }
         
-        if(reg.cargarTarjetas(eventosReuniones, componentes, this, "Reuniones") < 1){
+        if(reg.cargarTarjetas(eventosReuniones, componentes, this, "Reuniones", this.Odenar.getSelectedItem().toString()) < 1){
             this.jTabbedPane1.remove(this.Reuniones);
         }
         
-        if(reg.cargarTarjetas(eventosBodas, componentes, this, "Bodas") < 1){
+        if(reg.cargarTarjetas(eventosBodas, componentes, this, "Bodas", this.Odenar.getSelectedItem().toString()) < 1){
             this.jTabbedPane1.remove(this.Bodas);
         }
         
-        if(reg.cargarTarjetas(eventosOtros, componentes, this, "Otros") < 1){
+        if(reg.cargarTarjetas(eventosOtros, componentes, this, "Otros", this.Odenar.getSelectedItem().toString()) < 1){
             this.jTabbedPane1.remove(this.Otros);
         }
      
@@ -88,6 +89,8 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         jScrollPane5 = new javax.swing.JScrollPane();
         eventosOtros = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JButton();
+        Odenar = new javax.swing.JComboBox<>();
+        btnOrdenar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -286,6 +289,18 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         });
         jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, 80, 30));
 
+        Odenar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Por día", "Por Mes", "Por Año" }));
+        Odenar.setSelectedIndex(2);
+        jPanel1.add(Odenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 190, -1));
+
+        btnOrdenar.setText("Ordenar");
+        btnOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnOrdenar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 50, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
         pack();
@@ -306,6 +321,12 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
+        OpcionesEventos.eventos = new MostrarEventos(null, true, this.Odenar.getSelectedItem().toString());
+        OpcionesEventos.eventos.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnOrdenarActionPerformed
 
     
     public void actualizar(){
@@ -345,7 +366,7 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MostrarEventos dialog = new MostrarEventos(new javax.swing.JDialog(), true);
+                MostrarEventos dialog = new MostrarEventos(new javax.swing.JDialog(), true, "");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -361,9 +382,11 @@ public class MostrarEventos extends javax.swing.JDialog implements ActionListene
     private javax.swing.JInternalFrame Bodas;
     private javax.swing.JInternalFrame CitasMedicas;
     private javax.swing.JInternalFrame Cumpleanios;
+    private javax.swing.JComboBox<String> Odenar;
     private javax.swing.JInternalFrame Otros;
     private javax.swing.JInternalFrame Reuniones;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnOrdenar;
     private javax.swing.JPanel eventosBodas;
     private javax.swing.JPanel eventosCitas;
     private javax.swing.JPanel eventosCumple;

@@ -67,13 +67,36 @@ public class Registros {
     }
     
     
-    public int cargarTarjetas(JPanel panel, Map componentes, MostrarEventos ev, String categoria){
+    public int cargarTarjetas(JPanel panel, Map componentes, MostrarEventos ev, String categoria, String orden){
         int count= 0;
         
         try {
             
-            
-            sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where categoria='"+categoria+"'";
+           switch(orden.toLowerCase()){
+               case "general":
+                   
+                   sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where categoria='"+categoria+"'"
+                           + " order by anio, dia, mes ASC";
+                   
+                   break;
+               case "por día":
+                   
+                   sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where "
+                           + "categoria='"+categoria+"' order by diaSemana, mes ASC";
+                   
+                   break;
+               case "por mes":
+                   sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where "
+                           + "categoria='"+categoria+"' order by mes ASC";
+
+                   break;
+               case "por año":
+                   
+                   sql = "SELECT id, titulo, diaLetras, mesLetras from eventos where "
+                           + "categoria='"+categoria+"' order by anio ASC";
+                   
+                   break;
+           }
             
             statement = SegundoPlano.db.prepareStatement(sql);
             
@@ -262,7 +285,7 @@ public class Registros {
         cal.set(anio, mes, dia);
         diaSem = cal.get(Calendar.DAY_OF_WEEK);
         
-        sql = "UPDATE eventos SET dia=?, mes=?, anio=?, diaLetra=?, mesLetras=? WHERE id=?";
+        sql = "UPDATE eventos SET dia=?, mes=?, anio=?, diaLetras=?, mesLetras=? WHERE id=?";
         
         try {
             statement = SegundoPlano.db.prepareStatement(sql);

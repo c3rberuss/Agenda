@@ -58,11 +58,11 @@ public class SegundoPlano implements Runnable{
         }
     }
    
-    public void notificar(){
+    public void notificar(String tipo, String Titulo){
 
         //Se muestra la notificación
         
-        noti = new Notificacion(5, "evento", "Notificación".toUpperCase(), "Texto de prueba");
+        noti = new Notificacion(5, tipo, Titulo.toUpperCase(), "Texto de prueba");
         //Suena para notificar
         sonar();
         
@@ -120,7 +120,7 @@ public class SegundoPlano implements Runnable{
             result = statement.executeQuery();
             
             while(result.next()){
-                notificar();
+                notificar(result.getString("categoria"), result.getString("titulo"));
                 entro = true;
                 
                 if(result.getString("repetir").equalsIgnoreCase("si")){
@@ -178,9 +178,9 @@ public class SegundoPlano implements Runnable{
                 fecha = mostrarHora();
                 
                if( !buscarEventos(fecha[0], fecha[1])){
-                   Thread.sleep(9450);
+                   Thread.sleep(4000);
                }else{
-                   Thread.sleep(10000);
+                   Thread.sleep(4000);
                }
                 
                 

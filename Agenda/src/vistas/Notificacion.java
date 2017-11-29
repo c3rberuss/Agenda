@@ -225,11 +225,11 @@ public class Notificacion extends javax.swing.JFrame {
                 this.icono.setIcon(icono);
                 break;
                 
-            case "info":
+            case "reuniones":
                 icono = new ImageIcon(getClass().getResource("/recursos/imagenes/info.png"));
                 this.icono.setIcon(icono);
                 break;
-            case "evento":
+            case "otros":
                 icono = new ImageIcon(getClass().getResource("/recursos/imagenes/evento.png"));
                 this.icono.setIcon(icono);
                 break;
