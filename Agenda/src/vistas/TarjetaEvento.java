@@ -80,7 +80,7 @@ public class TarjetaEvento extends javax.swing.JPanel {
         add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 120, 61));
 
         titulo.setEditable(false);
-        titulo.setBackground(new java.awt.Color(236, 255, 255));
+        titulo.setBackground(new java.awt.Color(255, 255, 255));
         titulo.setColumns(20);
         titulo.setForeground(new java.awt.Color(0, 0, 0));
         titulo.setLineWrap(true);

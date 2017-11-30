@@ -285,7 +285,7 @@ public class DetalleEvento extends javax.swing.JDialog {
                 guardarActionPerformed(evt);
             }
         });
-        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 220, 30));
+        jPanel1.add(guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 530, 220, 30));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -454,13 +454,29 @@ public class DetalleEvento extends javax.swing.JDialog {
         });
         jPanel1.add(editarCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 40, 20));
 
-        eliminar.setText("Eliminar Evento");
+        eliminar.setBackground(new java.awt.Color(12, 12, 22));
+        eliminar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        eliminar.setText("ELIMINAR ESTE EVENTO");
+        eliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        eliminar.setBorderPainted(false);
+        eliminar.setContentAreaFilled(false);
+        eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminar.setFocusPainted(false);
+        eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                eliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                eliminarMouseExited(evt);
+            }
+        });
         eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, -1, -1));
+        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 150, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 620));
 
@@ -654,6 +670,14 @@ public class DetalleEvento extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null, "Evento eliminado exitosamente.");
         this.dispose();
     }//GEN-LAST:event_eliminarActionPerformed
+
+    private void eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseEntered
+        this.eliminar.setBorderPainted(true);
+    }//GEN-LAST:event_eliminarMouseEntered
+
+    private void eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminarMouseExited
+        this.eliminar.setBorderPainted(false);
+    }//GEN-LAST:event_eliminarMouseExited
 
     /**
      * @param args the command line arguments
