@@ -447,7 +447,7 @@ public class Principal extends javax.swing.JFrame {
 
 
     private void BtnTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemporizadorActionPerformed
-        Temporizador tem = new Temporizador(this,true);
+        Temporizador tem = new Temporizador(new javax.swing.JDialog(),true);
         tem.setVisible(true);
     }//GEN-LAST:event_BtnTemporizadorActionPerformed
 
