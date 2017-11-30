@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import agenda.Agenda;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;

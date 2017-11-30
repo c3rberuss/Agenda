@@ -6,23 +6,52 @@
 package vistas;
 
 import Animacion.Fade;
+import agenda.Agenda;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
+import servicios.Configuracion;
 import servicios.Registros;
 
 /**
  *
  * @author edwin
  */
+
 public class Perfil extends javax.swing.JDialog {
 
     private int x,y;
     private Registros reg;
+    private String[] datos;
+    private Configuracion conf; 
     
     public Perfil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        conf = new Configuracion();
         reg = new Registros();
+        
+        datos = reg.cargarPerfil();
+        
+        
+        if(Agenda.perfilIniciado){
+            this.Nombre.setText(datos[0]);
+            Calendar calendario = Calendar.getInstance();
+            
+            
+            if(datos[1].length() == 9){
+                calendario.set(Integer.valueOf(datos[1].substring(5)), Integer.valueOf(datos[1].substring(3,4)), 
+                        Integer.valueOf(datos[1].substring(0, 2)));
+            }else{
+                calendario.set(Integer.valueOf(datos[1].substring(6)), Integer.valueOf(datos[1].substring(3,5)), 
+                        Integer.valueOf(datos[1].substring(0, 2)));
+            }
+            
+            this.fecha.setCalendar(calendario);
+        }
+       
+        
     }
 
     /**
@@ -199,9 +228,22 @@ public class Perfil extends javax.swing.JDialog {
     }//GEN-LAST:event_GuardarMouseExited
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        reg.guardarPerfil(this.Nombre.getText(), this.fecha.getCalendar());
-        JOptionPane.showMessageDialog(null, "Su perfíl se guardó exitosamente.");
-        this.dispose();
+        
+        if(!this.Nombre.getText().isEmpty()){
+            if(Agenda.perfilIniciado){
+                reg.actualizarPerfil(this.Nombre.getText(), this.fecha.getCalendar());
+                JOptionPane.showMessageDialog(null, "Su perfíl se actualizó exitosamente.");
+                this.dispose();
+            }else{
+                reg.guardarPerfil(this.Nombre.getText(), this.fecha.getCalendar());
+                 JOptionPane.showMessageDialog(null, "Su perfíl se guardó exitosamente.");
+                 conf.modificarPropiedad("propiedad", "true");
+                Agenda.perfilIniciado = Boolean.valueOf(conf.getPropiedad("perfil"));
+                 this.dispose();
+                
+            }
+        }
+       
     }//GEN-LAST:event_GuardarActionPerformed
 
     /**

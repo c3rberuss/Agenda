@@ -6,8 +6,8 @@
 package vistas;
 
 import Animacion.Fade;
-import java.awt.Color;
-import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import servicios.Registros;
 
 /**
  *
@@ -15,14 +15,28 @@ import javax.swing.BorderFactory;
  */
 public class DetalleNota extends javax.swing.JDialog {
 
-  int  x,y;
-    public DetalleNota(java.awt.Dialog parent, boolean modal) {
+   private int  x,y;
+   private String[] datos;
+   private Registros reg;
+   private String id;
+   private boolean isEdit;
+  
+  
+    public DetalleNota(java.awt.Dialog parent, boolean modal, String id) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        reg = new Registros();
         
-         
-
+        this.id = id;
+        
+        datos = reg.mostrarApunte(this.id);
+        
+        this.titulo.setText(datos[1]);
+        this.descripcion.setText(datos[2]);
+        this.btnGuardar.setVisible(false);
+        
+        isEdit = false; 
     }
 
     /**
@@ -43,9 +57,11 @@ public class DetalleNota extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descripcion = new javax.swing.JTextArea();
-        editarTitulo = new javax.swing.JButton();
-        editarNota = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        editarContenido = new javax.swing.JToggleButton();
+        editarTitulo = new javax.swing.JToggleButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -121,7 +137,7 @@ public class DetalleNota extends javax.swing.JDialog {
                 tituloFocusLost(evt);
             }
         });
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 450, 20));
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 620, 20));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,8 +154,10 @@ public class DetalleNota extends javax.swing.JDialog {
         descripcion.setColumns(20);
         descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        descripcion.setLineWrap(true);
         descripcion.setRows(5);
         descripcion.setToolTipText("descripcion del evento");
+        descripcion.setWrapStyleWord(true);
         descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         descripcion.setCaretColor(new java.awt.Color(255, 255, 255));
         descripcion.setDisabledTextColor(new java.awt.Color(255, 255, 255));
@@ -149,45 +167,43 @@ public class DetalleNota extends javax.swing.JDialog {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 620, 240));
 
-        editarTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
-        editarTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        editarTitulo.setBorderPainted(false);
-        editarTitulo.setContentAreaFilled(false);
-        editarTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editarTitulo.setFocusPainted(false);
-        editarTitulo.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
-        editarTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editarTituloMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                editarTituloMouseExited(evt);
-            }
-        });
-        jPanel1.add(editarTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 130, 40, 30));
-
-        editarNota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/edit.png"))); // NOI18N
-        editarNota.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        editarNota.setBorderPainted(false);
-        editarNota.setContentAreaFilled(false);
-        editarNota.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        editarNota.setFocusPainted(false);
-        editarNota.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
-        editarNota.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editarNotaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                editarNotaMouseExited(evt);
-            }
-        });
-        jPanel1.add(editarNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 200, 40, 30));
-
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("MI NOTA");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 950, 30));
+
+        btnGuardar.setText("Guardar y Cerrar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, -1, -1));
+
+        editarContenido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
+        editarContenido.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                editarContenidoStateChanged(evt);
+            }
+        });
+        jPanel1.add(editarContenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 200, 40, 30));
+
+        editarTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/editPeq.png"))); // NOI18N
+        editarTitulo.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                editarTituloStateChanged(evt);
+            }
+        });
+        jPanel1.add(editarTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 40, 30));
+
+        btnEliminar.setText("Eliminar Nota");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
@@ -212,24 +228,12 @@ public class DetalleNota extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
+        if(isEdit){
+            JOptionPane.showMessageDialog(null, "Aún no guarda los cambios");
+        }else{
+            Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
+        }
     }//GEN-LAST:event_btnCerrarActionPerformed
-
-    private void editarTituloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarTituloMouseEntered
-        this.editarTitulo.setBorderPainted(true);
-    }//GEN-LAST:event_editarTituloMouseEntered
-
-    private void editarTituloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarTituloMouseExited
-        this.editarTitulo.setBorderPainted(false);
-    }//GEN-LAST:event_editarTituloMouseExited
-
-    private void editarNotaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarNotaMouseEntered
-        this.editarNota.setBorderPainted(true);
-    }//GEN-LAST:event_editarNotaMouseEntered
-
-    private void editarNotaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarNotaMouseExited
-        this.editarNota.setBorderPainted(false);
-    }//GEN-LAST:event_editarNotaMouseExited
 
     private void tituloFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tituloFocusGained
         this.titulo.setSize(615, 20);
@@ -238,6 +242,44 @@ public class DetalleNota extends javax.swing.JDialog {
     private void tituloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tituloFocusLost
         this.titulo.setSize(450, 20);
     }//GEN-LAST:event_tituloFocusLost
+
+    private void editarTituloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarTituloStateChanged
+       if(this.editarTitulo.isSelected()){
+           this.isEdit = true;
+           this.btnGuardar.setVisible(true);
+           this.titulo.setEditable(true);
+       }else{
+            this.titulo.setEditable(false);
+       }
+    }//GEN-LAST:event_editarTituloStateChanged
+
+    private void editarContenidoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarContenidoStateChanged
+        if(this.editarContenido.isSelected()){
+           this.isEdit = true;
+           this.btnGuardar.setVisible(true);
+           this.descripcion.setEditable(true);
+       }else{
+            this.descripcion.setEditable(false);
+        }
+    }//GEN-LAST:event_editarContenidoStateChanged
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       if(isEdit){
+           if(!this.titulo.getText().isEmpty() && !this.descripcion.getText().isEmpty()){
+               isEdit = false;
+                reg.guardarApunte(this.id, this.titulo.getText(), this.descripcion.getText());
+                JOptionPane.showMessageDialog(null, "Nota Actualizada Exitosamenete");
+           }else{
+               JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos");
+           }
+       }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        reg.eliminarApunte(this.id);
+        JOptionPane.showMessageDialog(null, "Nota Eliminada Exitosamenete");
+        this.dispose();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,7 +311,7 @@ public class DetalleNota extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DetalleNota dialog = new DetalleNota(new javax.swing.JDialog(), true);
+                DetalleNota dialog = new DetalleNota(new javax.swing.JDialog(), true, "1");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -283,15 +325,11 @@ public class DetalleNota extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JTextArea descripcion;
-    private javax.swing.JToggleButton editarLugar;
-    private javax.swing.JToggleButton editarLugar1;
-    private javax.swing.JToggleButton editarLugar2;
-    private javax.swing.JToggleButton editarLugar3;
-    private javax.swing.JToggleButton editarLugar4;
-    private javax.swing.JToggleButton editarLugar5;
-    private javax.swing.JButton editarNota;
-    private javax.swing.JButton editarTitulo;
+    private javax.swing.JToggleButton editarContenido;
+    private javax.swing.JToggleButton editarTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

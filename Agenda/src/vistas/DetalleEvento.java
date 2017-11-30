@@ -37,18 +37,20 @@ public class DetalleEvento extends javax.swing.JDialog {
         
         event = evt;
         
+        //se define elformato de los spinners
         JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(this.horaS, "HH:mm");
         JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(this.horaF, "HH:mm");
         
+        //se asigna el editor del spinner de las horas
         this.horaS.setEditor(timeEditor);
         this.horaF.setEditor(timeEditor2);
         
         date = new Date();
-
         datos = reg.detalle(id);
         
         this.id = id;
         
+        //se establece si se repite o no el evento
         if(datos[7].equalsIgnoreCase("NO")){
            this.NoRepetir.setSelected(true);
            this.Repetir.setVisible(false);
@@ -63,25 +65,31 @@ public class DetalleEvento extends javax.swing.JDialog {
         this.titulo.setText(datos[0]);
         this.descripcion.setText(datos[1]);
         
+        //Objeto para darle valor a los Spinners
         Calendar cal = Calendar.getInstance();
         
         cal.set(Integer.valueOf(datos[2]), Integer.valueOf(datos[3]), Integer.valueOf(datos[4]));
         
         this.fecha.setCalendar(cal);
-        
         int pos = datos[5].indexOf(":");
        
+        //se asigna la hora al spinner de hora inicio 
         String hora = datos[5].substring(0, pos);
-
         String minuto = datos[5].substring(pos+1);
-  
         date.setHours(Integer.valueOf(hora));
         date.setMinutes(Integer.valueOf(minuto));
-        
         this.horaS.setValue(date);
-        this.categoria.setSelectedItem(datos[6]);
+        
+        //Se asigna la hora al spinner del hora final
+        hora = datos[10].substring(0, pos);
+        minuto = datos[10].substring(pos+1);
+        date.setHours(Integer.valueOf(hora));
+        date.setMinutes(Integer.valueOf(minuto));
         this.horaF.setValue(date);
         
+        //se selecciona la categoria del evento
+        this.categoria.setSelectedItem(datos[6]);
+        //se setea el lugar del evento
         this.lugar.setText(datos[9]);
         
         editado = false;
@@ -148,8 +156,10 @@ public class DetalleEvento extends javax.swing.JDialog {
         descripcion.setColumns(20);
         descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        descripcion.setLineWrap(true);
         descripcion.setRows(5);
         descripcion.setToolTipText("Agregue una descripcion del evento");
+        descripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(descripcion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 248, -1));
@@ -552,45 +562,57 @@ public class DetalleEvento extends javax.swing.JDialog {
     }//GEN-LAST:event_guardarMouseExited
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        editado = false;
-
-        datos = new String[12];
-
-        datos[0] = this.titulo.getText();
-
-        datos[1] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH));
-        datos[2] = String.valueOf(this.fecha.getCalendar().get(Calendar.MONTH));
-        datos[3] = String.valueOf(this.fecha.getCalendar().get(Calendar.YEAR));
-        datos[4] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
-
-        int mes = Integer.valueOf(datos[2])+1;
-
-        datos[5] = datos[1]+"/"+String.valueOf(mes)+"/"+datos[3];
-
-        date = (Date) this.horaS.getValue();
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
-        datos[6] = hourFormat.format(date);
-
-        datos[7] = this.categoria.getSelectedItem().toString();
-        datos[8] = this.descripcion.getText();
-
-        if(this.NoRepetir.isSelected()){
-            datos[9] = this.NoRepetir.getText();
-            datos[10] = "NULL";
-        }else{
-            datos[9] = this.SiRepetir.getText();
-            datos[10] = this.Repetir.getSelectedItem().toString();
-        }
         
-        datos[11] = this.lugar.getText();
+        if(!this.titulo.getText().isEmpty() && !this.descripcion.getText().isEmpty() &&
+                !this.lugar.getText().isEmpty()){
+        
+            editado = false;
 
-        reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
+            datos = new String[13];
 
-        Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
+            datos[0] = this.titulo.getText();
 
-        event = new MostrarEventos(null, true, "General");
-        event.setLocationRelativeTo(null);
-        event.setVisible(true);
+            datos[1] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH));
+            datos[2] = String.valueOf(this.fecha.getCalendar().get(Calendar.MONTH));
+            datos[3] = String.valueOf(this.fecha.getCalendar().get(Calendar.YEAR));
+            datos[4] = String.valueOf(this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+
+            int mes = Integer.valueOf(datos[2])+1;
+
+            datos[5] = datos[1]+"/"+String.valueOf(mes)+"/"+datos[3];
+
+            date = (Date) this.horaS.getValue();
+            DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+            datos[6] = hourFormat.format(date);
+
+            datos[7] = this.categoria.getSelectedItem().toString();
+            datos[8] = this.descripcion.getText();
+
+            if(this.NoRepetir.isSelected()){
+                datos[9] = this.NoRepetir.getText();
+                datos[10] = "NULL";
+            }else{
+                datos[9] = this.SiRepetir.getText();
+                datos[10] = this.Repetir.getSelectedItem().toString();
+            }
+
+            datos[12] = hourFormat.format(this.horaF.getValue());
+
+            datos[11] = this.lugar.getText();
+
+            reg.guardarCambios(this.id, datos, this.fecha.getCalendar(), event);
+
+            Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this, Fade.DISPOSE);
+
+            event = new MostrarEventos(null, true, "General");
+            event.setLocationRelativeTo(null);
+            event.setVisible(true);
+
+            JOptionPane.showMessageDialog(null, "Evento actualizado exitosamente.");
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos.");
+        }
     }//GEN-LAST:event_guardarActionPerformed
 
     private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
@@ -658,7 +680,13 @@ public class DetalleEvento extends javax.swing.JDialog {
     }//GEN-LAST:event_editarLugarActionPerformed
 
     private void editarCategoria2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_editarCategoria2StateChanged
-        // TODO add your handling code here:
+       if(this.editarCategoria2.isSelected()){
+           this.categoria.setEnabled(true);
+           this.editado = true;
+           this.guardar.setVisible(true);
+       }else{
+           this.categoria.setEnabled(false);
+       }
     }//GEN-LAST:event_editarCategoria2StateChanged
 
     private void editarCategoria2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarCategoria2ActionPerformed

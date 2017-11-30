@@ -217,8 +217,10 @@ public class AgregarEvento extends javax.swing.JDialog {
         descripcion.setColumns(20);
         descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        descripcion.setLineWrap(true);
         descripcion.setRows(5);
         descripcion.setToolTipText("Agregue una descripcion del evento");
+        descripcion.setWrapStyleWord(true);
         jScrollPane1.setViewportView(descripcion);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 248, -1));
@@ -334,40 +336,47 @@ public class AgregarEvento extends javax.swing.JDialog {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
        
-        int mes = this.fecha.getCalendar().get(Calendar.MONTH)+1;
-        int dia = this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int anio = this.fecha.getCalendar().get(Calendar.YEAR);
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
-        String repeticion;
-        
-        datos.put("titulo", this.titulo.getText());
-        datos.put("descripcion", this.descripcion.getText());
-        datos.put("fecha", String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(anio));
-        datos.put("hora", hourFormat.format(this.horaS.getValue()));
-        
-        datos.put("categoria", this.categoria.getSelectedItem());
-        
-        if(this.SiRepetir.isSelected()){
-            datos.put("repetir", "SI");
-            repeticion = this.Repetir.getSelectedItem().toString();
-        }else{
-             datos.put("repetir", "NO");
-            repeticion = "NULL";
-        }
+        if(!this.titulo.getText().isEmpty() && !this.descripcion.getText().isEmpty() &&
+                !this.lugar.getText().isEmpty()){
+            int mes = this.fecha.getCalendar().get(Calendar.MONTH)+1;
+            int dia = this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int anio = this.fecha.getCalendar().get(Calendar.YEAR);
+            DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+            String repeticion;
 
-        datos.put("dia", String.valueOf(dia));
-        datos.put("mes", String.valueOf(mes-1));
-        datos.put("horaFin", hourFormat.format(this.horaF.getValue()));
-        datos.put("anio", String.valueOf(anio));
-        datos.put("diaLetras", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
-        datos.put("mesLetras", mes-1);
-        datos.put("repeticion", repeticion);
-        datos.put("lugar", this.lugar.getText());
-        datos.put("diaSemana", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
-        
-        reg.crearEvento(datos);
-        
-        JOptionPane.showMessageDialog(null, "Evento creado Correctamente");
+            datos.put("titulo", this.titulo.getText());
+            datos.put("descripcion", this.descripcion.getText());
+            datos.put("fecha", String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(anio));
+            datos.put("hora", hourFormat.format(this.horaS.getValue()));
+
+            datos.put("categoria", this.categoria.getSelectedItem());
+
+            if(this.SiRepetir.isSelected()){
+                datos.put("repetir", "SI");
+                repeticion = this.Repetir.getSelectedItem().toString();
+            }else{
+                 datos.put("repetir", "NO");
+                repeticion = "NULL";
+            }
+
+            datos.put("dia", String.valueOf(dia));
+            datos.put("mes", String.valueOf(mes-1));
+            datos.put("horaFin", hourFormat.format(this.horaF.getValue()));
+            datos.put("anio", String.valueOf(anio));
+            datos.put("diaLetras", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+            datos.put("mesLetras", mes-1);
+            datos.put("repeticion", repeticion);
+            datos.put("lugar", this.lugar.getText());
+            datos.put("diaSemana", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+
+            reg.crearEvento(datos);
+
+            JOptionPane.showMessageDialog(null, "Evento creado Correctamente");
+
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos");
+        }
     }//GEN-LAST:event_GuardarActionPerformed
 
     /**

@@ -58,17 +58,17 @@ public class SegundoPlano implements Runnable{
         }
     }
    
-    public void notificar(String tipo, String Titulo){
+    //muestra la notificacion
+    public void notificar(String tipo, String Titulo, String texto){
 
         //Se muestra la notificación
-        
-        noti = new Notificacion(5, tipo, Titulo.toUpperCase(), "Texto de prueba");
+        noti = new Notificacion(5, tipo, Titulo.toUpperCase(), texto);
         //Suena para notificar
         sonar();
         
     }
     
-    
+    //retorna la hora y fecha del actual
     public String[] mostrarHora(){
         String[] fechaHora = new String[2];
         
@@ -76,15 +76,21 @@ public class SegundoPlano implements Runnable{
         
         hora = calendario.get(Calendar.HOUR_OF_DAY);
         minuto = calendario.get(Calendar.MINUTE);
-        
         dia = calendario.get(Calendar.DAY_OF_MONTH);
         mes = calendario.get(Calendar.MONTH)+1;
         anio = calendario.get(Calendar.YEAR);
         
         fechaHora[0] = String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(anio);
-        fechaHora[1] = String.valueOf(hora)+":"+String.valueOf(minuto);
+        fechaHora[1] = String.valueOf(hora)+":";
         
-        System.out.println(hora + ":" + minuto);
+        if(String.valueOf(minuto).length() < 2){
+        
+            fechaHora[1] = fechaHora[1] + "0"+String.valueOf(minuto);
+        
+        }else{
+            fechaHora[1] = fechaHora[1] + String.valueOf(minuto);
+        }
+        
         System.out.println(fechaHora[0]);
         System.out.println(fechaHora[1]);
         
@@ -92,6 +98,7 @@ public class SegundoPlano implements Runnable{
     }
     
     
+    //se crea la conexion con la base de datos
     public void conectar(){
         try {
             Class.forName("org.sqlite.JDBC");
@@ -106,6 +113,7 @@ public class SegundoPlano implements Runnable{
         }
     }
     
+    //busca si hay eventos en el mismo instante
     public boolean buscarEventos(String fecha,String hora){
         
         boolean entro = false;
@@ -120,7 +128,7 @@ public class SegundoPlano implements Runnable{
             result = statement.executeQuery();
             
             while(result.next()){
-                notificar(result.getString("categoria"), result.getString("titulo"));
+                notificar(result.getString("categoria"), result.getString("titulo"), result.getString("descripcion"));
                 entro = true;
                 
                 if(result.getString("repetir").equalsIgnoreCase("si")){
@@ -134,6 +142,8 @@ public class SegundoPlano implements Runnable{
                     statement.setString(2, result.getString("id"));
                     statement.executeUpdate();
                     
+                    System.out.println(tmpFecha);
+                    
                     reg.actualizarFecha(result.getString("id"), tmpFecha);
                 }
                 
@@ -146,6 +156,7 @@ public class SegundoPlano implements Runnable{
         return entro;
     }
     
+    //reproduce un sonido de notificacion
     public void sonar(){
         try {
             
@@ -167,6 +178,7 @@ public class SegundoPlano implements Runnable{
         }
     }
     
+    //se crea un hilo secundario permanente que siempre está buscando eventos
     @Override
     public void run() {
         
@@ -191,6 +203,7 @@ public class SegundoPlano implements Runnable{
     }
     
     
+    //determina si el evento se va a repetir, si es así va actualizando la fecha
     public String repetir(String frecuencia, String fecha){
         
         int dia, mes, anio;
@@ -202,7 +215,7 @@ public class SegundoPlano implements Runnable{
         mes = Integer.valueOf(fecha.substring(3, 5)) - 1;
         
         switch(frecuencia.toLowerCase()){
-            case "diario":
+            case "diariamente":
                 
                 dia = dia + 1;
                 date.setDate(dia);
@@ -212,7 +225,7 @@ public class SegundoPlano implements Runnable{
                 
                 break;
 
-            case "semanal":
+            case "semanalmente":
                 
                 dia = dia + 7;
                 date.setDate(dia);
@@ -222,7 +235,7 @@ public class SegundoPlano implements Runnable{
                 
                 break;
                 
-            case "mensual":
+            case "mensualmente":
                 
                 mes = mes + 1;
                 date.setDate(dia);
@@ -233,7 +246,7 @@ public class SegundoPlano implements Runnable{
                 
                 break;
                 
-            case "anual":
+            case "anualmente":
                 
                 mes = mes + 12;
                 date.setDate(dia);

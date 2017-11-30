@@ -6,6 +6,8 @@
 package vistas;
 
 import Animacion.Fade;
+import javax.swing.JOptionPane;
+import servicios.Registros;
 
 /**
  *
@@ -13,11 +15,15 @@ import Animacion.Fade;
  */
 public class AgregarNota extends javax.swing.JDialog {
 
-    int x,y;
+    private int x,y;
+    private Registros reg;
+    
+    
     public AgregarNota(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        reg = new Registros();
     }
 
     /**
@@ -121,8 +127,10 @@ public class AgregarNota extends javax.swing.JDialog {
         descripcion.setColumns(20);
         descripcion.setFont(new java.awt.Font("Century Gothic", 2, 12)); // NOI18N
         descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        descripcion.setLineWrap(true);
         descripcion.setRows(5);
         descripcion.setToolTipText("Agregue una descripcion del evento");
+        descripcion.setWrapStyleWord(true);
         descripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         descripcion.setCaretColor(new java.awt.Color(255, 255, 255));
         descripcion.setDisabledTextColor(new java.awt.Color(255, 255, 255));
@@ -149,6 +157,11 @@ public class AgregarNota extends javax.swing.JDialog {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 GuardarMouseExited(evt);
+            }
+        });
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
             }
         });
         jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 120, 30));
@@ -198,6 +211,16 @@ public class AgregarNota extends javax.swing.JDialog {
     private void GuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseExited
         this.Guardar.setBorderPainted(false);
     }//GEN-LAST:event_GuardarMouseExited
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        if(!this.titulo.getText().isEmpty() && !this.descripcion.getText().isEmpty()){
+            reg.agregarApunte(this.titulo.getText(), this.descripcion.getText());
+            JOptionPane.showMessageDialog(null, "Se guardó correctamente.");
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "No puede dejar campos vacíos.");
+        }
+    }//GEN-LAST:event_GuardarActionPerformed
 
     /**
      * @param args the command line arguments

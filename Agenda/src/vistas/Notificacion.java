@@ -224,9 +224,13 @@ public class Notificacion extends javax.swing.JFrame {
                 icono = new ImageIcon(getClass().getResource("/recursos/imagenes/cumpleanos.png"));
                 this.icono.setIcon(icono);
                 break;
+            
+            case "citas médicas":
+                icono = new ImageIcon(getClass().getResource("/recursos/imagenes/citaMedica.png"));
+                this.icono.setIcon(icono);
                 
             case "reuniones":
-                icono = new ImageIcon(getClass().getResource("/recursos/imagenes/info.png"));
+                icono = new ImageIcon(getClass().getResource("/recursos/imagenes/ReunionesPestanha.png"));
                 this.icono.setIcon(icono);
                 break;
             case "otros":

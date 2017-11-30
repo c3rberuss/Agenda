@@ -99,7 +99,6 @@ public class Temporizador extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         spinnerSegundo = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -225,7 +224,7 @@ public class Temporizador extends javax.swing.JDialog {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 280, -1, -1));
 
-        btnIniciar.setText("iniciar");
+        btnIniciar.setText("INICIAR");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarActionPerformed(evt);
@@ -263,14 +262,6 @@ public class Temporizador extends javax.swing.JDialog {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 360, 90));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 30, 20));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
         pack();
@@ -300,7 +291,7 @@ public class Temporizador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-         this.btnIniciar.setVisible(false);
+         this.btnIniciar.setEnabled(false);
         if(init == false){
              
             setHours((int) this.spinnerHora.getValue());
@@ -325,10 +316,6 @@ public class Temporizador extends javax.swing.JDialog {
             init = false;
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     public void iniciarTemporizador(){
@@ -368,7 +355,7 @@ public class Temporizador extends javax.swing.JDialog {
                  jPanel4.updateUI();
                  sonar();
                  running = false;
-                 
+                 btnIniciar.setEnabled(true);
              }
              
          } 
@@ -458,7 +445,6 @@ public class Temporizador extends javax.swing.JDialog {
     private javax.swing.JLabel LblSeconds;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnIniciar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

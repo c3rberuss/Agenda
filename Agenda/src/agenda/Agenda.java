@@ -24,16 +24,18 @@ public class Agenda {
     
     public static String root;
     private static Configuracion conf;
+    public static boolean perfilIniciado;
     
     public static void main(String[] args) {
         
         conf = new Configuracion();
         conf.inicializar(); 
         root = conf.getPropiedad("root");
-         
-        System.out.println(root);
-        System.out.println(System.getProperty("os.name").toLowerCase());
+        
+        //se inicializa la variable 
+        perfilIniciado = Boolean.valueOf(conf.getPropiedad("perfil"));
        
+        //se verifica si la aplicacion ya se está ejecutando
         try {
             JUnique.acquireLock("Agenda-UES_FMO");
         } catch (AlreadyLockedException e) {
@@ -41,13 +43,14 @@ public class Agenda {
             System.exit(0);
         }
         
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        
+        //se inicia un nuevo hilo. (se encarga de ver si hay eventos programados en la fecha y hora actual)
         SegundoPlano background = new SegundoPlano();
         Thread hilo = new Thread(background); 
         hilo.start();
-       
+        
+        //se inicia la pnatalla principal
+        Principal principal = new Principal();
+        principal.setVisible(true);
         
     }
     

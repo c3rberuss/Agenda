@@ -6,18 +6,36 @@
 package vistas;
 
 import Animacion.Fade;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import servicios.Registros;
+
+
 
 /**
  *
  * @author edwin
  */
-public class MostrarNota extends javax.swing.JDialog {
+public class MostrarNota extends javax.swing.JDialog implements ActionListener{
 
-    int x,y;
+    private int x,y;
+    private DetalleNota detalle;
+    private Map notas;
+    private Registros reg;
+    
     public MostrarNota(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        notas = new HashMap();
+        
+        
+        reg = new Registros();
+        
+        reg.cargarNotas(PanelNotas, notas, this);
     }
 
     /**
@@ -33,6 +51,9 @@ public class MostrarNota extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PanelNotas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -92,6 +113,36 @@ public class MostrarNota extends javax.swing.JDialog {
             }
         });
         jPanel1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 560, 80, 30));
+
+        jPanel3.setBackground(new java.awt.Color(12, 12, 22));
+        jPanel3.setForeground(new java.awt.Color(12, 12, 22));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        PanelNotas.setBackground(new java.awt.Color(12, 12, 22));
+        PanelNotas.setForeground(new java.awt.Color(12, 12, 22));
+        PanelNotas.setLayout(new java.awt.GridBagLayout());
+        jScrollPane1.setViewportView(PanelNotas);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 930, 510));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
@@ -162,9 +213,43 @@ public class MostrarNota extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelNotas;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JLabel jLabel2;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        //se obtiene el comando ejecutado
+        String comando = e.getActionCommand();
+        //se recorre el MAP
+        Iterator it = notas.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry)it.next();
+            //se obtiene el KEY -> identificador unico
+            String itm = entry.getKey().toString();
+            //si comando de componente es igual a comando pulsado
+            if( itm.equals(comando))
+            {
+                //se recupera el contenido del JTextfield
+                //String name = ((jpComponente) entry.getValue()).txtName.getText();
+                //mostramos resultado
+                //JOptionPane.showMessageDialog(null, "Se presiono boton " + itm + " \n Hola " );//+ name);
+                
+                
+                
+                detalle = new DetalleNota(null, true, comando);
+                
+                this.dispose();
+                
+                detalle.setLocationRelativeTo(null);
+                detalle.setVisible(true);
+                
+            }
+        }
+    }
 }

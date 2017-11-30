@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import vistas.Perfil;
 
 /**
  *
@@ -31,6 +30,9 @@ public class Configuracion {
     private String separador;
     
     public Configuracion(){
+        
+        //se obtiene datos del sistema como el nombre del sistema operativo
+        //el serapador de archivos y la carpeta home del usuario
         
         separador = System.getProperty("file.separator");
         osName = System.getProperty("os.name").toLowerCase();
@@ -51,6 +53,7 @@ public class Configuracion {
            
     }
     
+    //crear la carpeta Agenda en la carpera HOME del usuario y la oculta
     private void crearCarpeta(){
         
         try {
@@ -73,13 +76,14 @@ public class Configuracion {
         
     }
     
+    //Se crea la Base de datos con SQLite
     private void crearBD(){
         try {
             
             Class.forName("org.sqlite.JDBC");
             Connection con = DriverManager.getConnection("jdbc:sqlite:"+rootPath+separador+"agenda.db"); 
             
-            String sql ="CREATE TABLE `eventos` (\n" +
+            String sql ="CREATE TABLE IF NOT EXISTS `eventos` (\n" +
                         "	`titulo`	TEXT,\n" +
                         "	`descripcion`	TEXT,\n" +
                         "	`fecha`	TEXT,\n" +
@@ -110,6 +114,15 @@ public class Configuracion {
             statement = con.prepareStatement(sql);
             statement.executeUpdate();
             
+            sql = "CREATE TABLE IF NOT EXISTS `apuntes` (\n" +
+                "	`id`	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,\n" +
+                "	`titulo`	TEXT,\n" +
+                "	`contenido`	TEXT\n" +
+                ");";
+            
+            statement = con.prepareStatement(sql);
+            statement.executeUpdate();
+            
             con.close();
                     
         } catch (ClassNotFoundException | SQLException ex) {
@@ -117,6 +130,7 @@ public class Configuracion {
         }
     }
     
+    //crea el archivo de propiedades en la carpeta Agenda en el user.home
     private void crearPropiedades(){
         
         String separador = System.getProperty("file.separator");
@@ -127,10 +141,11 @@ public class Configuracion {
             
             if(!archivo.exists()) {
 
-            
+                //inserta las propiedades en el archivo
                 bw = new BufferedWriter(new FileWriter(archivo));
                 bw.write("root=none\n"+
-                        "init=false"); 
+                        "init=false\n"
+                        + "perfil=false"); 
                 bw.close();
             
             }
@@ -142,9 +157,8 @@ public class Configuracion {
     }
     
     
-    private void setPropiedad(){
-
-        
+    //cambia el valor de las propiedades del archivo 
+    private void setPropiedad(){        
         try {
             
             propiedades.load(new FileReader(rootPath+separador+"config.properties"));
@@ -159,6 +173,20 @@ public class Configuracion {
             
     }
     
+    //modifica solo una propiedad del archivo
+    public void modificarPropiedad(String key, String valor){
+         try {
+            
+            propiedades.load(new FileReader(rootPath+separador+"config.properties"));
+            propiedades.setProperty("perfil", valor);
+            propiedades.store(new FileWriter(rootPath+separador+"config.properties"),"perfil creado");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Configuracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    //retorna la propiedad con x Key (o identificador)
     public String getPropiedad(String key){
         
         String prop = null;
@@ -175,6 +203,10 @@ public class Configuracion {
                 case "init":
                     prop = propiedades.getProperty("init");
                     break;
+                
+                case "perfil":
+                    prop = propiedades.getProperty("perfil");
+                    break;
                     
                 default:
                     prop = "propiedad no definida";
@@ -190,11 +222,13 @@ public class Configuracion {
         
     }
     
+    //ejecuta alguna de las funciones anteriores
     public void inicializar(){
         
         crearCarpeta();
         crearPropiedades();
         
+        //verifica si la aplicacion ya ha sido inicializada
         if(!Boolean.valueOf(getPropiedad("init"))){
             crearBD();
             setPropiedad();

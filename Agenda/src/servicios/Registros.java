@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vistas.MostrarEventos;
+import vistas.MostrarNota;
+import vistas.Notas;
 import vistas.TarjetaEvento;
 
 /**
@@ -65,7 +67,7 @@ public class Registros {
         
     }
     
-    
+    //muestra las "tarjetas"con los eventos guardados
     public int cargarTarjetas(JPanel panel, Map componentes, MostrarEventos ev, String categoria, String orden){
         int count= 0;
         
@@ -145,6 +147,7 @@ public class Registros {
         
     }
     
+    //Guarda eventos en la base de datos
     public void crearEvento(Map datos){
     
         try {
@@ -190,7 +193,7 @@ public class Registros {
     
     }
     
-    
+    //Elimina Eventos de la Base de Datos 
     public void eliminarEvento(String id){
         sql = "DELETE FROM eventos WHERE id=?";
         
@@ -208,14 +211,13 @@ public class Registros {
         
     }
     
-    
-    String[] datos = new String[10];
+    //Metodo para mostrar en detalle cada uno de los eventos
+    String[] datos = new String[11];
     public String[] detalle(String id){
         
         try {
             
-            
-            sql = "SELECT titulo, descripcion, dia, mes, anio, hora, categoria, repetir, repeticion, lugar "
+            sql = "SELECT titulo, descripcion, dia, mes, anio, hora, categoria, repetir, repeticion, lugar, horaFin "
                     + "from eventos where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
@@ -235,6 +237,7 @@ public class Registros {
                 datos[7] = rs.getString("repetir");
                 datos[8] = rs.getString("repeticion");
                 datos[9] = rs.getString("lugar");
+                datos[10] = rs.getString("horaFin");
                 
             }
             
@@ -246,11 +249,12 @@ public class Registros {
     }
     
     
+    //guarda los cambios realiados en la vista detallada de cada evento 
     public void guardarCambios(String id, String[] datos, Calendar cal, MostrarEventos event){
         try {
             sql = "UPDATE eventos SET titulo = ?,dia=?, mes=?, anio=?, mesLetras=?, "
                     + "diaLetras=? ,fecha = ?, hora=?, categoria=?, descripcion=?, "
-                    + "repetir=?, repeticion=?, lugar=? where id=?";
+                    + "repetir=?, repeticion=?, lugar=?, horaFin=? where id=?";
             
             statement = SegundoPlano.db.prepareStatement(sql);
             
@@ -272,8 +276,9 @@ public class Registros {
             statement.setString(11, datos[9]);
             statement.setString(12, datos[10]);
             statement.setString(13, datos[11]);
+            statement.setString(14, datos[12]);
             
-            statement.setString(14, id);
+            statement.setString(15, id);
             
             statement.executeUpdate();
             
@@ -290,6 +295,7 @@ public class Registros {
         
     }
     
+    //actualiza la UI de la tarjeta especificada
     public void actualizarTarjeta(Map tarjetas, String id, String mes, String dia, String titulo){
         
         Iterator it = tarjetas.entrySet().iterator();
@@ -310,6 +316,7 @@ public class Registros {
         
     }
     
+    //actualiza la fecha del evento en la base de Datos
     public void actualizarFecha(String id, String fecha){
         
         int dia, mes, anio, diaSem;
@@ -319,6 +326,8 @@ public class Registros {
         dia = Integer.valueOf(fecha.substring(0, 2));
         mes = Integer.valueOf(fecha.substring(3, 5)) - 1;
         anio = Integer.valueOf(fecha.substring(6));
+        
+        fechaFormato = String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(anio);
         
         Calendar cal = Calendar.getInstance();
         cal.set(anio, mes, dia);
@@ -347,7 +356,7 @@ public class Registros {
         
     }
     
-    
+    //Retorna el dia de la semana y la abreviación del mes  
     public void fecha(Calendar calendario){
 
         String dia = String.valueOf(calendario.get(Calendar.DAY_OF_WEEK));
@@ -358,7 +367,7 @@ public class Registros {
         
     }
     
-   
+   //guarda el perfil y crear el evento del cumpleaños
     public void guardarPerfil(String nombre, Calendar fecha_){
         
         sql = "INSERT INTO perfil VALUES(?, ?)";
@@ -404,6 +413,238 @@ public class Registros {
         datos.put("diaSemana", fecha_.get(Calendar.DAY_OF_WEEK));
         
         crearEvento(datos);
+        
+    }
+    
+    //agrega apuntes o notas a la Base de Datos
+    public void agregarApunte(String titulo, String contenido){
+        
+        sql = "INSERT INTO apuntes VALUES(null, ?, ?)";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, titulo);
+            statement.setString(2, contenido);
+            
+            statement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    //Guarda los cambios hechos en los apuntes a detalle
+    public void guardarApunte(String id, String titulo, String contenido){
+        
+        sql = "UPDATE apuntes SET titulo=?, contenido=? WHERE id=?";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, titulo);
+            statement.setString(2, contenido);
+            statement.setString(3, id);
+
+            statement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    //elimina el apunte seleccionado de la basede datos
+    public void eliminarApunte(String id){
+        
+        sql = "DELETE FROM apuntes WHERE id=?";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, id);
+
+            statement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    //muestra a detalle apunte/nota seleccionado
+    String[] cont = new String[3];     
+    public String[] mostrarApunte(String id){
+        
+        sql = "SELECT * FROM apuntes WHERE id=?";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, id);
+
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                cont[0] = rs.getString("id");
+                cont[1] = rs.getString("titulo");
+                cont[2] = rs.getString("contenido");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return cont;
+    }
+    
+    
+    //carga las tarjetas de las notas
+    public int cargarNotas(JPanel panel, Map notas, MostrarNota ev){
+        
+       sql = "SELECT * FROM apuntes";
+       int count = 0;
+       
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            GridBagConstraints constraints = new GridBagConstraints();
+            
+            int fila = 0;
+            int columna = 0;
+            
+            while(rs.next()){
+                
+                if(columna == 2){
+                    fila++;
+                    columna = 0;
+                }
+                
+                Notas tarjeta = new Notas();
+                tarjeta.titulo.setText(rs.getString("titulo"));
+                tarjeta.contenido.setText(rs.getString("contenido")+"...");
+                tarjeta.Ver.setActionCommand(rs.getString("id"));
+                tarjeta.Ver.addActionListener(ev);
+                
+                constraints = new GridBagConstraints();
+                
+                constraints.gridx = columna;
+                constraints.gridy = fila;
+                constraints.gridwidth = 1;
+                constraints.gridheight = 1;
+                constraints.weightx = 1.0;
+                constraints.weighty = 0.8;
+                constraints.fill = GridBagConstraints.NONE;
+                
+                panel.add(tarjeta, constraints);
+                panel.updateUI();
+                notas.put(rs.getString("id"), tarjeta);
+                count++;
+                columna++;
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       return 0;
+    }
+    
+    //carga el perfil antes guardado
+    public String[] cargarPerfil(){
+        
+        String[] datos = new String[2];
+        int count = 0;
+        
+        sql = "SELECT nombre, fechaNacimiento FROM perfil";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                datos[0] = rs.getString("nombre");
+                datos[1] = rs.getString("fechaNacimiento");
+                count++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(count < 1){
+            datos[0] = "Indefinido";
+            datos[1] = "28/08/1998";
+        }
+        
+        return datos;
+    }
+    
+    
+    public int count(){
+        int c = 0;
+        
+        sql = "SELECT COUNT(*) FROM eventos WHERE titulo=?";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, ".* Mi Cumpleaños *.");
+            
+            rs = statement.executeQuery();
+            
+            while(rs.next()){
+                c++;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       
+        
+        return c;
+    }
+    
+    
+    //actualiza perfil del usuario
+    public void actualizarPerfil(String nombre, Calendar fecha_){
+        
+        sql = "update perfil set nombre=?, fechaNacimiento=?";
+        String fechaNac = null;
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, nombre);
+            
+            fechaNac = String.valueOf(fecha_.get(Calendar.DAY_OF_MONTH))+"/"+
+                       String.valueOf(fecha_.get(Calendar.MONTH))+"/"+
+                       String.valueOf(fecha_.get(Calendar.YEAR));
+            
+            statement.setString(2, fechaNac);
+            
+            statement.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
