@@ -7,12 +7,20 @@ package vistas;
 
 import Animacion.Fade;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
+import servicios.SegundoPlano;
 
 /**
  *
@@ -27,15 +35,31 @@ public class Temporizador extends javax.swing.JDialog {
     private int Seconds;
     private int MiliSeconds;
     private boolean init;
+    private boolean running;
     private Clip sonido;
-    private DefaultTableModel modelo;
-    private final int HoursInMili = 3600000;
-    private final int SecondsInMili = 1000;
-    private final int MinutesInMili = 60000;
+    private long tiempo;
+    private AudioInputStream ais;
+    private BufferedInputStream bis; 
+    
+    
     public Temporizador(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        tiempo = 0;
+        running = false;
+        
+       try {
+           
+           bis = new BufferedInputStream(getClass().getResourceAsStream("/recursos/sonidos/beep.wav"));
+           ais = AudioSystem.getAudioInputStream(bis);
+           
+           sonido = AudioSystem.getClip();
+           
+       } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+           Logger.getLogger(Temporizador.class.getName()).log(Level.SEVERE, null, ex);
+       }
+        
     }
 
     public Temporizador() {
@@ -75,6 +99,7 @@ public class Temporizador extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         spinnerSegundo = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -238,6 +263,14 @@ public class Temporizador extends javax.swing.JDialog {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 360, 90));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 30, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 600));
 
         pack();
@@ -261,7 +294,9 @@ public class Temporizador extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCerrarMouseExited
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
+  
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
@@ -270,11 +305,20 @@ public class Temporizador extends javax.swing.JDialog {
              
             setHours((int) this.spinnerHora.getValue());
             setMinutes((int) this.spinnerMinuto.getValue());
-            setSeconds((int) this.spinnerSegundo.getValue());
+            
+            if(((int)this.spinnerSegundo.getValue()) > 1){
+                setSeconds((int) this.spinnerSegundo.getValue() - 1);
+            }else{
+                setSeconds((int) this.spinnerSegundo.getValue());
+            }
+            
+            tiempo = (long) ((getHours() * 3600000) + (getMinutes() * 60000) + (getSeconds() * 1000) - 0.5);
+
             setMiliSeconds(1000);
             timer = new Timer();
             iniciarTemporizador();
             init = true;
+            running = true;
                  
         }else{
             getTimer().cancel();
@@ -282,12 +326,20 @@ public class Temporizador extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
     public void iniciarTemporizador(){
              // Clase en la que está el código a ejecutar 
         TimerTask timerTask = new TimerTask() { 
          public void run()  {
              
+             
              setMiliSeconds(getMiliSeconds()-1);
+             tiempo--;
+             
              if(getMiliSeconds() == 0){
                  setMiliSeconds(1000);
                  setSeconds(getSeconds()-1);
@@ -309,6 +361,15 @@ public class Temporizador extends javax.swing.JDialog {
              
              actualizarVentana(String.valueOf(getHours()), String.valueOf(getMinutes()), 
                      String.valueOf(getSeconds()),String.valueOf(getMiliSeconds()));
+             
+           if(tiempo == 0){
+                 timer.cancel();
+                 actualizarVentana("00", "00", "00", "000");                 
+                 jPanel4.updateUI();
+                 sonar();
+                 running = false;
+                 
+             }
              
          } 
      };
@@ -397,6 +458,7 @@ public class Temporizador extends javax.swing.JDialog {
     private javax.swing.JLabel LblSeconds;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -462,7 +524,28 @@ public class Temporizador extends javax.swing.JDialog {
     }
 
    
-    
+    public void sonar(){
+        try {
+            
+            //Se carga el clip de audio
+            bis = new BufferedInputStream(getClass().getResourceAsStream("/recursos/sonidos/beep.wav"));
+            ais = AudioSystem.getAudioInputStream(bis);
+            sonido = AudioSystem.getClip();
+            sonido.open(ais);
+            
+            //inicia la reproducción
+            sonido.start();
+             sonido.loop(2);
+            //Se pausa el hilo para esperar la reproducción del Sonido
+            Thread.sleep(9000);
+           
+            //se cierra el clip de audio
+            sonido.close();
+            
+        } catch (LineUnavailableException | IOException | InterruptedException | UnsupportedAudioFileException ex) {
+            Logger.getLogger(SegundoPlano.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
 }
