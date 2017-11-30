@@ -6,8 +6,15 @@
 package vistas;
 
 import Animacion.Fade;
-import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
+import servicios.Registros;
 
 /**
  *
@@ -15,11 +22,25 @@ import javax.swing.SpinnerDateModel;
  */
 public class AgregarEvento extends javax.swing.JDialog {
 
-    int x,y;
+    private int x,y;
+    private Registros reg;
+    private Map datos;
+    
+    
     public AgregarEvento(javax.swing.JDialog parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(this.horaS, "HH:mm");
+        JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(this.horaF, "HH:mm");
+        
+        this.horaS.setEditor(timeEditor);
+        this.horaF.setEditor(timeEditor2);
+        reg = new Registros();
+        
+        datos = new HashMap();
+        
     }
 
     /**
@@ -31,6 +52,7 @@ public class AgregarEvento extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -157,10 +179,11 @@ public class AgregarEvento extends javax.swing.JDialog {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
 
         SiRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        buttonGroup1.add(SiRepetir);
         SiRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         SiRepetir.setForeground(new java.awt.Color(255, 255, 255));
+        SiRepetir.setSelected(true);
         SiRepetir.setText("SI");
-        SiRepetir.setEnabled(false);
         SiRepetir.setFocusPainted(false);
         SiRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -170,11 +193,10 @@ public class AgregarEvento extends javax.swing.JDialog {
         jPanel1.add(SiRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, -1, -1));
 
         NoRepetir.setBackground(new java.awt.Color(12, 12, 22));
+        buttonGroup1.add(NoRepetir);
         NoRepetir.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         NoRepetir.setForeground(new java.awt.Color(255, 255, 255));
-        NoRepetir.setSelected(true);
         NoRepetir.setText("NO");
-        NoRepetir.setEnabled(false);
         NoRepetir.setFocusPainted(false);
         NoRepetir.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -186,8 +208,7 @@ public class AgregarEvento extends javax.swing.JDialog {
         Repetir.setBackground(new java.awt.Color(12, 12, 22));
         Repetir.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Repetir.setForeground(new java.awt.Color(255, 255, 255));
-        Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
-        Repetir.setSelectedIndex(1);
+        Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diariamente", "Semanalmente", "Mensualmente", "Anualmente" }));
         Repetir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Repetir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 290, 120, -1));
@@ -224,6 +245,11 @@ public class AgregarEvento extends javax.swing.JDialog {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 GuardarMouseExited(evt);
+            }
+        });
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
             }
         });
         jPanel1.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 120, 30));
@@ -275,11 +301,15 @@ public class AgregarEvento extends javax.swing.JDialog {
     }//GEN-LAST:event_jPanel2MousePressed
 
     private void SiRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SiRepetirStateChanged
-
+        if(this.SiRepetir.isSelected()){
+            this.Repetir.setEnabled(true);
+        }
     }//GEN-LAST:event_SiRepetirStateChanged
 
     private void NoRepetirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_NoRepetirStateChanged
-
+       if(this.NoRepetir.isSelected()){
+            this.Repetir.setEnabled(false);
+       }
     }//GEN-LAST:event_NoRepetirStateChanged
 
     private void GuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseEntered
@@ -301,6 +331,44 @@ public class AgregarEvento extends javax.swing.JDialog {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         Fade.JDialogFadeOut(1f, 0f, 0.1f, 50, this,Fade.DISPOSE);
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+       
+        int mes = this.fecha.getCalendar().get(Calendar.MONTH)+1;
+        int dia = this.fecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int anio = this.fecha.getCalendar().get(Calendar.YEAR);
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        String repeticion;
+        
+        datos.put("titulo", this.titulo.getText());
+        datos.put("descripcion", this.descripcion.getText());
+        datos.put("fecha", String.valueOf(dia)+"/"+String.valueOf(mes)+"/"+String.valueOf(anio));
+        datos.put("hora", hourFormat.format(this.horaS.getValue()));
+        
+        datos.put("categoria", this.categoria.getSelectedItem());
+        
+        if(this.SiRepetir.isSelected()){
+            datos.put("repetir", "SI");
+            repeticion = this.Repetir.getSelectedItem().toString();
+        }else{
+             datos.put("repetir", "NO");
+            repeticion = "NULL";
+        }
+
+        datos.put("dia", String.valueOf(dia));
+        datos.put("mes", String.valueOf(mes-1));
+        datos.put("horaFin", hourFormat.format(this.horaF.getValue()));
+        datos.put("anio", String.valueOf(anio));
+        datos.put("diaLetras", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+        datos.put("mesLetras", mes-1);
+        datos.put("repeticion", repeticion);
+        datos.put("lugar", this.lugar.getText());
+        datos.put("diaSemana", this.fecha.getCalendar().get(Calendar.DAY_OF_WEEK));
+        
+        reg.crearEvento(datos);
+        
+        JOptionPane.showMessageDialog(null, "Evento creado Correctamente");
+    }//GEN-LAST:event_GuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,6 +418,7 @@ public class AgregarEvento extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> Repetir;
     private javax.swing.JRadioButton SiRepetir;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> categoria;
     private javax.swing.JTextArea descripcion;
     private com.toedter.calendar.JDateChooser fecha;

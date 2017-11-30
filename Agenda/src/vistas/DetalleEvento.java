@@ -128,6 +128,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         lugar = new javax.swing.JTextField();
         editarCategoria2 = new javax.swing.JToggleButton();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setUndecorated(true);
@@ -377,8 +378,7 @@ public class DetalleEvento extends javax.swing.JDialog {
         Repetir.setBackground(new java.awt.Color(12, 12, 22));
         Repetir.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         Repetir.setForeground(new java.awt.Color(255, 255, 255));
-        Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
-        Repetir.setSelectedIndex(1);
+        Repetir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diariamente", "Semanalmente", "Mensualmente", "Anualmente" }));
         Repetir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Repetir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(Repetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 120, -1));
@@ -453,6 +453,14 @@ public class DetalleEvento extends javax.swing.JDialog {
             }
         });
         jPanel1.add(editarCategoria2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, 40, 20));
+
+        eliminar.setText("Eliminar Evento");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 620));
 
@@ -641,6 +649,12 @@ public class DetalleEvento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_editarCategoria2ActionPerformed
 
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        reg.eliminarEvento(this.id);
+        JOptionPane.showMessageDialog(null, "Evento eliminado exitosamente.");
+        this.dispose();
+    }//GEN-LAST:event_eliminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -698,6 +712,7 @@ public class DetalleEvento extends javax.swing.JDialog {
     private javax.swing.JToggleButton editarLugar;
     private javax.swing.JToggleButton editarRepetir;
     private javax.swing.JToggleButton editarTitulo;
+    private javax.swing.JButton eliminar;
     private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton guardar;
     private javax.swing.JSpinner horaF;

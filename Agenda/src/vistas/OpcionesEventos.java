@@ -167,6 +167,7 @@ public class OpcionesEventos extends javax.swing.JDialog {
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         AgregarEvento AgEv = new AgregarEvento(new javax.swing.JDialog(),true);
         AgEv.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void BtnVerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnVerMouseEntered
@@ -180,6 +181,7 @@ public class OpcionesEventos extends javax.swing.JDialog {
     private void BtnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerActionPerformed
 
         this.eventos.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnVerActionPerformed
 
     private void BtnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCerrarMouseEntered

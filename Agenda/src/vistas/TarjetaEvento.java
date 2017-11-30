@@ -20,9 +20,15 @@ public class TarjetaEvento extends javax.swing.JPanel {
     /**
      * Creates new form tarjeta_Eventos
      */
-    public TarjetaEvento() {
+    
+    private URL url;
+    private Image image;
+    
+    public TarjetaEvento(String mes) {
         initComponents();
+        url = getClass().getResource("/recursos/imagenes/meses/"+mes.toLowerCase()+".jpg");
         
+        image  = new ImageIcon(url).getImage();
     }
 
     /**
@@ -39,10 +45,9 @@ public class TarjetaEvento extends javax.swing.JPanel {
         Mes = new javax.swing.JLabel();
         titulo = new javax.swing.JTextArea();
 
-        setBorder(new org.edisoncor.gui.util.DropShadowBorder());
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(420, 100));
-        setPreferredSize(new java.awt.Dimension(420, 100));
+        setPreferredSize(new java.awt.Dimension(420, 130));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/view.png"))); // NOI18N
@@ -59,30 +64,30 @@ public class TarjetaEvento extends javax.swing.JPanel {
                 VerMouseExited(evt);
             }
         });
-        add(Ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 47, 26));
+        add(Ver, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 47, 26));
         Ver.getAccessibleContext().setAccessibleDescription("");
 
         Fecha.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Fecha.setForeground(new java.awt.Color(0, 0, 0));
         Fecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Fecha.setText("Miercoles 15");
-        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 7, 120, 24));
+        add(Fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 24));
 
         Mes.setFont(new java.awt.Font("Dialog", 1, 42)); // NOI18N
         Mes.setForeground(new java.awt.Color(0, 0, 0));
         Mes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Mes.setText("DIC");
-        add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 120, 61));
+        add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 120, 61));
 
         titulo.setEditable(false);
-        titulo.setBackground(new java.awt.Color(255, 255, 255));
+        titulo.setBackground(new java.awt.Color(236, 255, 255));
         titulo.setColumns(20);
         titulo.setForeground(new java.awt.Color(0, 0, 0));
         titulo.setLineWrap(true);
         titulo.setRows(5);
         titulo.setWrapStyleWord(true);
         titulo.setBorder(null);
-        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 250, 33));
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 250, 33));
     }// </editor-fold>//GEN-END:initComponents
 
     private void VerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VerMouseEntered
@@ -93,8 +98,7 @@ public class TarjetaEvento extends javax.swing.JPanel {
         this.Ver.setBorderPainted(false);
     }//GEN-LAST:event_VerMouseExited
 
-    private URL url = getClass().getResource("/recursos/imagenes/tarjeta.jpg");
-    Image image = new ImageIcon(url).getImage();
+
  
     @Override
     public void paint(Graphics g){

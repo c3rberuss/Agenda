@@ -7,6 +7,8 @@ package vistas;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -17,11 +19,27 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
+    private SimpleDateFormat fechaFormato;
+    private String fechaT;
+    
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
-         Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/recursos/imagenes/iconoAgenda.png"));
+        
+        fechaFormato = new SimpleDateFormat("EEEEE dd"); 
+        fechaT = fechaFormato.format(new Date()) + " de ";
+        
+        fechaFormato = new SimpleDateFormat("MMMMM");
+        fechaT = fechaT + fechaFormato.format(new Date()) + " del ";
+        
+        fechaFormato = new SimpleDateFormat("yyyy"); 
+         fechaT = fechaT + fechaFormato.format(new Date());
+        
+        this.fecha.setText(fechaT.toUpperCase());
+        
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/recursos/imagenes/iconoAgenda.png"));
         setIconImage(icon);
         setVisible(true);
     }
@@ -38,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
         Base = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        fecha = new javax.swing.JLabel();
         clockDigital2 = new org.edisoncor.gui.varios.ClockDigital();
         PanelCambiable = new javax.swing.JPanel();
         BtnTemporizador = new javax.swing.JButton();
@@ -65,10 +83,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/imagenes/agendaSuper.png"))); // NOI18N
         jLabel1.setText("LA AGENDA   ");
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("00 DEL MES DEL 2017");
+        fecha.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        fecha.setForeground(new java.awt.Color(255, 255, 255));
+        fecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        fecha.setText("00 DEL MES DEL 2017");
 
         clockDigital2.setForeground(new java.awt.Color(255, 255, 255));
 
@@ -84,14 +102,14 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(HeaderLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
+                        .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(clockDigital2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -499,10 +517,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel Header;
     private javax.swing.JPanel PanelCambiable;
     private org.edisoncor.gui.varios.ClockDigital clockDigital2;
+    private javax.swing.JLabel fecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

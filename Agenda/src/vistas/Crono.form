@@ -335,6 +335,7 @@
         <Component class="javax.swing.JButton" name="btnVuelta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vuelta"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVueltaActionPerformed"/>

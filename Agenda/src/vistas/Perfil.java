@@ -6,6 +6,8 @@
 package vistas;
 
 import Animacion.Fade;
+import javax.swing.JOptionPane;
+import servicios.Registros;
 
 /**
  *
@@ -13,12 +15,14 @@ import Animacion.Fade;
  */
 public class Perfil extends javax.swing.JDialog {
 
-    int x,y;
+    private int x,y;
+    private Registros reg;
     
     public Perfil(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        reg = new Registros();
     }
 
     /**
@@ -153,6 +157,11 @@ public class Perfil extends javax.swing.JDialog {
                 GuardarMouseExited(evt);
             }
         });
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
         jPanel3.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 120, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 510));
@@ -188,6 +197,12 @@ public class Perfil extends javax.swing.JDialog {
     private void GuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMouseExited
         this.Guardar.setBorderPainted(false);
     }//GEN-LAST:event_GuardarMouseExited
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        reg.guardarPerfil(this.Nombre.getText(), this.fecha.getCalendar());
+        JOptionPane.showMessageDialog(null, "Su perfíl se guardó exitosamente.");
+        this.dispose();
+    }//GEN-LAST:event_GuardarActionPerformed
 
     /**
      * @param args the command line arguments

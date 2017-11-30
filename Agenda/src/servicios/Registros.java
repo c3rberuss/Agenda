@@ -9,7 +9,6 @@ import java.awt.GridBagConstraints;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -113,7 +112,7 @@ public class Registros {
                     columna = 0;
                 }
                 
-                TarjetaEvento tarjeta = new TarjetaEvento();
+                TarjetaEvento tarjeta = new TarjetaEvento(rs.getString("mesLetras"));
                 tarjeta.titulo.setText(rs.getString("titulo"));
                 tarjeta.Mes.setText(rs.getString("mesLetras"));
                 tarjeta.Fecha.setText(rs.getString("diaLetras"));
@@ -146,29 +145,69 @@ public class Registros {
         
     }
     
-    public void crearEvento(String titulo, String descripcion, String fecha, String hora, String tipo, boolean repetir){
+    public void crearEvento(Map datos){
     
         try {
             
-            sql = "INSERT INTO Agenda VALUES(?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO eventos VALUES(?, ?, ?, ?, ?, ?, ?, null, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             statement = SegundoPlano.db.prepareStatement(sql);
-            statement.setString(1, titulo);
-            statement.setString(2, descripcion);
-            statement.setString(3, fecha);
-            statement.setString(4, hora);
-            statement.setString(5, tipo);
-            statement.setBoolean(6, repetir);
+            
+            statement.setString(1, datos.get("titulo").toString());
+            statement.setString(2, datos.get("descripcion").toString());
+            statement.setString(3, datos.get("fecha").toString());
+            statement.setString(4, datos.get("hora").toString());
+            statement.setString(5, datos.get("categoria").toString());
+            statement.setString(6, datos.get("repetir").toString());
+            statement.setInt(7, Integer.valueOf(datos.get("dia").toString()));
+            
+            statement.setInt(8, Integer.valueOf(datos.get("mes").toString()));
+            statement.setString(9, datos.get("horaFin").toString());
+            statement.setInt(10, Integer.valueOf(datos.get("anio").toString()));
+            
+            String diaLetras = diaSemana.get(String.valueOf(datos.get("diaLetras"))) + 
+                    ", "+String.valueOf(datos.get("dia"));
+            
+            System.out.println(diaLetras);
+            
+            statement.setString(11, diaLetras);
+           
+
+            String mesLetras = meses.get(datos.get("mesLetras").toString()).toString();
+            statement.setString(12, mesLetras);
+            statement.setString(13, datos.get("repeticion").toString());
+            
+            statement.setString(14, datos.get("lugar").toString());
+            
+            statement.setInt(15, Integer.valueOf(datos.get("diaSemana").toString()));
             
             statement.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Se guardó su Evento/Recordatorio Exitósamente.");
             
         } catch (SQLException ex) {
             Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
         }
     
     }
+    
+    
+    public void eliminarEvento(String id){
+        sql = "DELETE FROM eventos WHERE id=?";
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setInt(1, Integer.valueOf(id));
+            
+            statement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
     
     String[] datos = new String[10];
     public String[] detalle(String id){
@@ -319,7 +358,53 @@ public class Registros {
         
     }
     
-    
-    
+   
+    public void guardarPerfil(String nombre, Calendar fecha_){
+        
+        sql = "INSERT INTO perfil VALUES(?, ?)";
+        String fechaNac = null;
+        
+        try {
+            
+            statement = SegundoPlano.db.prepareStatement(sql);
+            
+            statement.setString(1, nombre);
+            
+            fechaNac = String.valueOf(fecha_.get(Calendar.DAY_OF_MONTH))+"/"+
+                       String.valueOf(fecha_.get(Calendar.MONTH)+1)+"/"+
+                       String.valueOf(fecha_.get(Calendar.YEAR));
+            
+            statement.setString(2, fechaNac);
+            
+            statement.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Registros.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        Map datos = new HashMap();
+        
+        datos.put("titulo", ".* Mi Cumpleaños *.");
+        datos.put("descripcion", "Uno de los días más esperados.");
+        datos.put("fecha", fechaNac);
+        datos.put("hora", "05:00");
+        datos.put("categoria", "Cumpleaños");
+        datos.put("repetir", "SI");
+        datos.put("dia", String.valueOf(fecha_.get(Calendar.DAY_OF_MONTH)));
+        datos.put("mes", String.valueOf(fecha_.get(Calendar.MONTH)));
+        datos.put("horaFin", "23:59");
+        datos.put("anio", String.valueOf(fecha_.get(Calendar.YEAR)));
+        datos.put("diaLetras", fecha_.get(Calendar.DAY_OF_WEEK));
+        
+        datos.put("mesLetras", fecha_.get(Calendar.MONTH));
+        datos.put("repeticion", "Anualmente");
+        datos.put("lugar", "Indefinido");
+        datos.put("diaSemana", fecha_.get(Calendar.DAY_OF_WEEK));
+        
+        crearEvento(datos);
+        
+    }
     
 }

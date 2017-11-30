@@ -234,6 +234,7 @@ public class Crono extends javax.swing.JDialog {
         jPanel1.add(btnPausar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, -1, -1));
 
         btnVuelta.setText("Vuelta");
+        btnVuelta.setEnabled(false);
         btnVuelta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVueltaActionPerformed(evt);
@@ -273,6 +274,7 @@ public class Crono extends javax.swing.JDialog {
             setMinutes(0);
             setSeconds(0);
             setMiliSeconds(0);
+            this.btnVuelta.setEnabled(true);
             timer = new Timer();
             iniciarCronometro();
             this.btnIniciar.setText("Parar");
@@ -291,6 +293,7 @@ public class Crono extends javax.swing.JDialog {
         }else{
             getTimer().cancel();
             init = false;
+            this.btnVuelta.setEnabled(false);
             this.btnIniciar.setText("Reiniciar");
             this.btnPausar.setText("Continuar");
         }
@@ -302,12 +305,14 @@ public class Crono extends javax.swing.JDialog {
             iniciarCronometro();
             this.btnPausar.setText("Pausar");
             this.btnIniciar.setText("Parar");
+            this.btnVuelta.setEnabled(true);
             init = true;
         }else{
             getTimer().cancel();
             init = false;
             this.btnPausar.setText("Continuar");
             this.btnIniciar.setText("Reiniciar");
+            this.btnVuelta.setEnabled(false);
         }
     }//GEN-LAST:event_btnPausarActionPerformed
 
@@ -399,79 +404,33 @@ public class Crono extends javax.swing.JDialog {
         float seconds = Integer.valueOf(this.LblSeconds.getText());
         float miliseconds = Integer.valueOf(this.LblMiliSeconds.getText());
           
-        
-        /*System.out.println("Horas: "+hours);
-        System.out.println("Minutos: "+minutes);
-        System.out.println("Aegundos: "+seconds);
-        System.out.println("Milisegundos: "+miliseconds);*/
-        
-            
-        if(hours > 0){
-            hours = hours * (HoursInMili / hours);
-        }
-        
-        if(minutes > 0){
-           minutes = minutes * (MinutesInMili / minutes); 
-        }
-        
-        if(seconds > 0){
-            seconds = seconds * (SecondsInMili / seconds);
-        }
-        
-        
         float antHours = Integer.valueOf(tiempoAnte.substring(0, 2));
         float antMinutes = Integer.valueOf(tiempoAnte.substring(3, 5));
         float antSeconds = Integer.valueOf(tiempoAnte.substring(6, 8));
         float antMili = Integer.valueOf(tiempoAnte.substring(9));
         
-        /*System.out.println("Horas Ant: "+antHours);
-        System.out.println("Minutos Ant: "+antMinutes);
-        System.out.println("Aegundos Ant: "+antSeconds);
-        System.out.println("Milisegundos Ant: "+antMili);*/
         
-        if(antHours > 0){
-            antHours = antHours * (HoursInMili / antHours);
+        while(miliseconds < antMili){
+            seconds--;
+            miliseconds+=1000;
         }
-        
-        if(antMinutes > 0){
-           antMinutes = antMinutes * (MinutesInMili / antMinutes); 
-        }
-        
-        if(antMili > 0){
-            antMili = antMili * (SecondsInMili / antMili);
-        }
-        
-        hours = hours - antHours;
-        minutes = minutes - antMinutes;
-        seconds = seconds - antSeconds;
         miliseconds = miliseconds - antMili ;
         
-        if(hours > 0){
-            hours = (int)Math.ceil(hours * (1 / hours));
-            System.out.println("\n\nHoras Residuales: "+hours);
-        }else{
-            //hours = hours * (-1);
+        while(seconds < antSeconds){
+            minutes--;
+            seconds+=60;
         }
         
-        if(minutes > 0){
-           minutes = (int)Math.ceil(minutes * (1 / minutes));
-           System.out.println("Minutos Residuales: "+minutes);
-        }else{
-            //minutes = minutes * (-1);
-        }
+        seconds = seconds - antSeconds;
         
-        if(seconds > 0){
-            System.out.println("Segundos en Milis Restantes: "+seconds);
-            seconds = (int)Math.ceil(seconds * (1 / seconds));
-            System.out.println("Segundos Residuales: "+seconds);
-        }else{
-            //seconds = seconds * (-1);
+        while(minutes < antMinutes){
+            hours--;
+            antMinutes+=60;
         }
+        minutes = minutes - antMinutes;
         
-         if(miliseconds < 0){
-            miliseconds =  miliseconds * (-1);
-             System.out.println("Milisegundos Residuales: "+miliseconds+"\n\n");
-        }
+       
+        hours = hours - antHours;
          
         return "+"+String.valueOf((int)hours)+":"+String.valueOf((int)minutes)+":"+
                 String.valueOf((int)seconds)+":"+String.valueOf((int)miliseconds);

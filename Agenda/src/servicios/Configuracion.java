@@ -5,14 +5,11 @@
  */
 package servicios;
 
-import agenda.Agenda;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +17,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import vistas.Perfil;
 
 /**
  *
@@ -101,6 +99,15 @@ public class Configuracion {
                         ");";
             
             PreparedStatement statement = con.prepareStatement(sql);
+            statement.executeUpdate();
+            
+            
+            sql="CREATE TABLE `perfil` (\n" +
+                "	`nombre`	TEXT,\n" +
+                "	`fechaNacimiento`	TEXT\n" +
+                ");";
+            
+            statement = con.prepareStatement(sql);
             statement.executeUpdate();
             
             con.close();
